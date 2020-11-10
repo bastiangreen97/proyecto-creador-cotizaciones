@@ -1,6 +1,9 @@
 //Array parar guardar los objetos (productos y servicios) almacenados en el localstorage, si no, usa un array vacío
 let items = JSON.parse(localStorage.getItem('arrayItems')) || [];
 const formNewItem = document.getElementById('form-newitem');
+const txtName = document.getElementById('name');
+const btnNewItem = document.getElementById('btn-newitem');
+const btnEditItem = document.getElementById('btn-edititem');
 const table = document.getElementById('tbl-content');
 const indicator = document.getElementById('indicator-content');
 
@@ -24,8 +27,14 @@ const newItem = (name, type, price) => {
     items.push(item);
     setLocalStorage(items);
 }
- 
-//Elimina el objeto del array a través de su nombre
+
+//Retorna un objeto según su nombre
+const getItem = (name) => {
+    const item = items.find(element => element.name === name);
+    return item;
+}
+
+//Elimina el objeto del array según su nombre
 const deleteItem = (name) => {
     let index = null;
     index = items.findIndex((element) => element.name === name);
@@ -46,7 +55,6 @@ const editItem = (name, type, price) => {
 //El array se transforma en un string para ser guardado en el localstorage
 const setLocalStorage = (array) => {
     localStorage.setItem('arrayItems', JSON.stringify(array));
-
 }
 
 //Inserta diferentes elementos en el DOM
@@ -92,7 +100,7 @@ const indicatorTemplate = () => {
 window.onload = () => {
     elementsTemplate();
 
-    formNewItem.addEventListener('submit', (e) => {
+    btnNewItem.addEventListener('click', (e) => {
         //e.preventDefault previene que la página se refresque
         e.preventDefault();
         const name = document.getElementById('name').value;
@@ -122,27 +130,53 @@ window.onload = () => {
             elementsTemplate();
             formNewItem.reset();
         }
-    
     });
+
+    btnEditItem.addEventListener('click', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const type = document.getElementById('slc-type').value;
+        const price = document.getElementById('price').value;
+        if(type == 0){
+            alert('Debe seleccionar un tipo');
+            document.getElementById('slc-type').focus();
+        }else if(price == 0 || price == null){
+            alert('Debe ingresar un valor mayor a 0');
+            document.getElementById('price').focus();
+        }else{
+            editItem(name, type, price);
+            alert(`El ${type} con nombre: ${name} fue modificado correctamente`);
+            elementsTemplate();
+            formNewItem.reset();
+            txtName.disabled = false;
+            btnEditItem.disabled = true;
+        }
+
+    })
 
     table.addEventListener('click', (e) =>{
         e.preventDefault();
         if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
             if(e.target.innerHTML === 'Eliminar'){
+                formNewItem.reset();
+                txtName.disabled = false;
+                btnEditItem.disabled = true;
                 console.log(e.target.value);
                 deleteItem(e.target.value);
                 alert('El item: '+e.target.value+' fue eliminado');
                 elementsTemplate();
             }
             if(e.target.innerHTML === 'Editar'){
-
+                txtName.disabled = true;
+                btnEditItem.disabled = false;
+                const item = getItem(e.target.value);
+                document.getElementById('name').value = item.name;
+                document.getElementById('slc-type').value = item.type;
+                document.getElementById('price').value = item.price;
             }
         }
     
     })
-
-
-
 }
 
 
