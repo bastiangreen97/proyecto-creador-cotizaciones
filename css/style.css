@@ -1,0 +1,13 @@
+body{
+    background: rgb(37,86,106);
+    background: linear-gradient(342deg, rgba(37,86,106,1) 11%, rgba(108,220,255,1) 79%);
+}
+
+.container{
+    width: 80% !important;
+}
+
+.icon-card{
+    width: 50px;
+    height: 50px;
+}

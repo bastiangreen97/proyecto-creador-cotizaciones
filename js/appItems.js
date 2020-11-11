@@ -1,11 +1,16 @@
 //Array parar guardar los objetos (productos y servicios) almacenados en el localstorage, si no, usa un array vacío
 let items = JSON.parse(localStorage.getItem('arrayItems')) || [];
+const modalItems = document.getElementById('modal-items');
 const formNewItem = document.getElementById('form-newitem');
 const txtName = document.getElementById('name');
+const btnNewRegister = document.getElementById('btn-newregister');
+const btnCancel = document.getElementById('btn-cancel');
 const btnNewItem = document.getElementById('btn-newitem');
 const btnEditItem = document.getElementById('btn-edititem');
 const table = document.getElementById('tbl-content');
-const indicator = document.getElementById('indicator-content');
+const indicatorServices = document.getElementById('card-services');
+const indicatorProducts = document.getElementById('card-products');
+const indicatorAll = document.getElementById('card-total');
 
 //Retorna verdadero si ya se encuentra un item registrado con el mismo nombre
 const findItem = (name) => {
@@ -66,14 +71,15 @@ const elementsTemplate = () => {
 //Diseño y elementos de la tabla
 const tableTemplate = () => {
     table.innerHTML = '';
+    //TODO: Aplicar correción a los botones
     items.forEach(element => {
         table.innerHTML += `
             <tr>
                 <td>${element.name}</td>
                 <td>${element.type}</td>
                 <td>${element.price}</td>
-                <td><button value="${element.name}">Eliminar</button></td>
-                <td><button value="${element.name}">Editar</button></td>
+                <td><button class="btn-small red" value="${element.name}">Eliminar</button></td>
+                <td><button class="waves-effect waves-light btn-small orange" value="${element.name}"><i class="material-icons">edit</i>Editar</button></td>
             </tr>
         `;
     });
@@ -81,24 +87,58 @@ const tableTemplate = () => {
 
 //Diseño y elementos de indicadores
 const indicatorTemplate = () => {
-    indicator.innerHTML = '';
-    let countProducts = 0;
+    indicatorServices.innerHTML = '';
+    indicatorProducts.innerHTML = '';
+    indicatorAll.innerHTML = '';
+
     let countServices = 0;
+    let countProducts = 0;
     let countAll = 0;
 
-    countProducts = items.filter(element => element.type === 'producto').length;
     countServices = items.filter(element => element.type === 'servicio').length;
+    countProducts = items.filter(element => element.type === 'producto').length;
     countAll = items.length;
-    return indicator.innerHTML = `
-        <span>Productos registrados: ${countProducts}</span>
-        <span>Servicios registrados: ${countServices}</span>
-        <span>Total items registrados: ${countAll}</span>
-        `;
+
+    indicatorServices.innerHTML = `
+        <img src="img/servicios.png" class="icon-card"><p>Servicios registrados: ${countServices}</p>
+    `;
+    indicatorProducts.innerHTML = `
+        <img src="img/productos.png" class="icon-card"><p>Productos registrados: ${countProducts}</p>
+    `;
+    indicatorAll.innerHTML = `
+        <img src="img/total.png" class="icon-card"><p>Total de registros: ${countAll}<p>
+    `;
 }
+
+//Inicia los modals y select de materialize
+document.addEventListener('DOMContentLoaded', function() {
+    const elemsMdl = document.querySelectorAll('.modal');
+    const instancesMdl = M.Modal.init(elemsMdl);
+    const elemsSlc = document.querySelectorAll('select');
+    const instancesSlc = M.FormSelect.init(elemsSlc);
+});
 
 //Carga de contenido DOM, funciones
 window.onload = () => {
     elementsTemplate();
+    const instanceModal = M.Modal.getInstance(modalItems);
+
+    btnNewRegister.addEventListener('click', (e) => {
+        formNewItem.reset();
+        instanceModal.open();
+        txtName.disabled = false;
+        btnNewItem.disabled = false;
+        btnNewItem.style.display = "";
+        btnEditItem.disabled = true;
+        btnEditItem.style.display = 'none';
+        e.preventDefault();
+    });
+
+    btnCancel.addEventListener('click', (e) => {
+        e.preventDefault();
+        instanceModal.close();
+        formNewItem.reset();
+    })
 
     btnNewItem.addEventListener('click', (e) => {
         //e.preventDefault previene que la página se refresque
@@ -107,10 +147,7 @@ window.onload = () => {
         const type = document.getElementById('slc-type').value;
         const price = document.getElementById('price').value;
         const find = findItem(name);
-        
-        console.log(name);
-        console.log(type);
-        console.log(price);
+
         if(name == '' || name.length == 0){
             alert('Debe ingresar un nombre');
             document.getElementById('name').focus();
@@ -124,7 +161,6 @@ window.onload = () => {
             alert('Debe ingresar un valor mayor a 0');
             document.getElementById('price').focus();
         }else{
-            console.log(price);
             newItem(name,type,price);
             alert(`El ${type} con nombre: ${name} fue registrado correctamente`);
             elementsTemplate();
@@ -148,34 +184,39 @@ window.onload = () => {
             alert(`El ${type} con nombre: ${name} fue modificado correctamente`);
             elementsTemplate();
             formNewItem.reset();
-            txtName.disabled = false;
-            btnEditItem.disabled = true;
+            instanceModal.close();
         }
 
     })
 
     table.addEventListener('click', (e) =>{
+
+        //TODO: Aplicar correción a los botones y values
         e.preventDefault();
-        if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
-            if(e.target.innerHTML === 'Eliminar'){
-                formNewItem.reset();
-                txtName.disabled = false;
-                btnEditItem.disabled = true;
-                console.log(e.target.value);
+        console.log(e.target.innerHTML);
+        console.log(e.target.parentNode.firstChild.value);
+        if(e.target.innerHTML === 'ELIMINAR' || e.target.innerHTML === 'edit'){
+            console.log(e.target.innerHTML);
+            if(e.target.innerHTML === 'ELIMINAR'){
                 deleteItem(e.target.value);
                 alert('El item: '+e.target.value+' fue eliminado');
                 elementsTemplate();
+                
             }
-            if(e.target.innerHTML === 'Editar'){
+            if(e.target.innerHTML === 'edit'){
+                console.log(e.target.id);
+                instanceModal.open();
                 txtName.disabled = true;
+                btnNewItem.disabled = true;
+                btnNewItem.style.display = 'none';
                 btnEditItem.disabled = false;
-                const item = getItem(e.target.value);
+                btnEditItem.style.display = "";
+                const item = getItem(e.target.id);
                 document.getElementById('name').value = item.name;
                 document.getElementById('slc-type').value = item.type;
                 document.getElementById('price').value = item.price;
             }
         }
-    
     })
 }
 

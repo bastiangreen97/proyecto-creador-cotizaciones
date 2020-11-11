@@ -4,24 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor de items</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <form action="submit" id="form-newitem">
-        <input type="text" name="name" id="name" maxlength="20">
-        <select name="type" id="slc-type">
-            <option value="0">Seleccione un tipo</option>
-            <option value="servicio">Servicio</option>
-            <option value="producto">Producto</option>
-        </select>
-        <input type="number" name="price" id="price">
-        <button type="submit" id="btn-newitem">Ingresar</button>
-        <button type="submit" id="btn-edititem" disabled>Modificar</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6">
+                
+            </div>
+            <div class="col s12 m6">
+                <div class="row">
+                    <div class="col s12 m4">
+                        <div class="card orange darken-2">
+                            <div  id="card-services" class="card-content white-text center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card orange darken-2">
+                            <div  id="card-products" class="card-content white-text center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m4">
+                        <div class="card orange darken-2">
+                            <div  id="card-total" class="card-content white-text center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <button type="submit" id="btn-newregister">Nuevo registro de producto/servicio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <!-- Modal/popup para registro y modificar item-->
+                <div id="modal-items" class="modal">
+                    <div class="modal-content">
+                      <h4>Nuevo registro</h4>
+                      <form action="submit" id="form-newitem">
+                        <input type="text" name="name" id="name" maxlength="30" placeholder="Nombre (obligatorio)">
+                        <select name="type" id="slc-type">
+                            <option value="0">Seleccione un tipo (obligatorio)</option>
+                            <option value="servicio">Servicio</option>
+                            <option value="producto">Producto</option>
+                        </select>
+                        <input type="number" name="price" id="price" placeholder="Valor unitario (obligatorio)">
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btn-newitem">Ingresar</button>
+                        <button type="submit" id="btn-edititem" disabled>Modificar</button>
+                        <button type="submit" id="btn-cancel">Cancelar</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
     <table>
         <thead>
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Precio</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
         </thead>
         <tbody id="tbl-content">
             
@@ -31,5 +83,6 @@
 
     </div>
     <script src="js/appItems.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
