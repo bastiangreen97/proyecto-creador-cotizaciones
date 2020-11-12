@@ -1,13 +1,61 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
+
 body{
-    background: rgb(37,86,106);
-    background: linear-gradient(342deg, rgba(37,86,106,1) 11%, rgba(108,220,255,1) 79%);
+    background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+    
+}
+
+nav{
+    background-color: black;
 }
 
 .container{
     width: 80% !important;
 }
 
+h3,h4{
+    font-family: 'Amatic SC', cursive;
+    text-shadow: 4px 4px 4px rgba(150, 150, 150, 1);
+    text-align: center;
+}
+
+input{
+    font-family: 'Roboto', sans-serif;
+}
+
+div.card{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 16px;
+}
+
+table{
+    font-family: 'PT Sans Narrow', sans-serif;
+    background-color: white;
+    color: #727272;
+}
+
+thead{
+    border: none;
+    background-color: #A699AB;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+td{
+    padding: 13px;
+}
+
 .icon-card{
     width: 50px;
     height: 50px;
 }
+
+.width-100{
+    width: 100% !important;
+}
+
+/*Evita que los items y columnas en una fila se compriman de forma horizontal a medida que baja el tamaño de la pantalla, pasandolos a col s12*/
+@media only screen and (max-width: 600px) { .row.valign-wrapper { display: inherit; }}

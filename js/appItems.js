@@ -16,7 +16,7 @@ const indicatorAll = document.getElementById('card-total');
 const findItem = (name) => {
     let find = false;
     items.find((element) => {
-        if(element.name === name){
+        if(element.name.toLowerCase() == name.toLowerCase()){
             find = true;
         }
     });
@@ -79,7 +79,7 @@ const tableTemplate = () => {
                 <td>${element.type}</td>
                 <td>${element.price}</td>
                 <td><button class="btn-small red" value="${element.name}">Eliminar</button></td>
-                <td><button class="waves-effect waves-light btn-small orange" value="${element.name}"><i class="material-icons">edit</i>Editar</button></td>
+                <td><button class="btn-small" value="${element.name}">Editar</button></td>
             </tr>
         `;
     });
@@ -110,12 +110,14 @@ const indicatorTemplate = () => {
     `;
 }
 
-//Inicia los modals y select de materialize
+//Inicia los componentes de materialize
 document.addEventListener('DOMContentLoaded', function() {
     const elemsMdl = document.querySelectorAll('.modal');
     const instancesMdl = M.Modal.init(elemsMdl);
     const elemsSlc = document.querySelectorAll('select');
     const instancesSlc = M.FormSelect.init(elemsSlc);
+    const elemsNav = document.querySelectorAll('.sidenav');
+    const instancesNav = M.Sidenav.init(elemsNav);
 });
 
 //Carga de contenido DOM, funciones
@@ -125,6 +127,7 @@ window.onload = () => {
 
     btnNewRegister.addEventListener('click', (e) => {
         formNewItem.reset();
+        document.getElementById('title-mdl').innerHTML = 'Nuevo registro';
         instanceModal.open();
         txtName.disabled = false;
         btnNewItem.disabled = false;
@@ -152,7 +155,7 @@ window.onload = () => {
             alert('Debe ingresar un nombre');
             document.getElementById('name').focus();
         }else if(find){
-            alert('Ya existe un producto/servicio registrado con el nombre: '+name);
+            M.toast({html: `Ya existe un producto/servicio registrado con el nombre: ${name}`});
             document.getElementById('name').focus();
         }else if(type == 0){
             alert('Debe seleccionar un tipo');
@@ -162,7 +165,7 @@ window.onload = () => {
             document.getElementById('price').focus();
         }else{
             newItem(name,type,price);
-            alert(`El ${type} con nombre: ${name} fue registrado correctamente`);
+            M.toast({html: `El ${type} con nombre: ${name} fue registrado correctamente`});
             elementsTemplate();
             formNewItem.reset();
         }
@@ -181,7 +184,7 @@ window.onload = () => {
             document.getElementById('price').focus();
         }else{
             editItem(name, type, price);
-            alert(`El ${type} con nombre: ${name} fue modificado correctamente`);
+            M.toast({html: `El ${type} con nombre: ${name} fue modificado correctamente`});
             elementsTemplate();
             formNewItem.reset();
             instanceModal.close();
@@ -194,24 +197,22 @@ window.onload = () => {
         //TODO: Aplicar correción a los botones y values
         e.preventDefault();
         console.log(e.target.innerHTML);
-        console.log(e.target.parentNode.firstChild.value);
-        if(e.target.innerHTML === 'ELIMINAR' || e.target.innerHTML === 'edit'){
-            console.log(e.target.innerHTML);
-            if(e.target.innerHTML === 'ELIMINAR'){
+        console.log(e.target.value);
+        if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
+            if(e.target.innerHTML === 'Eliminar'){
                 deleteItem(e.target.value);
-                alert('El item: '+e.target.value+' fue eliminado');
-                elementsTemplate();
-                
+                M.toast({html: `El item: ${e.target.value} fue eliminado`});
+                elementsTemplate();            
             }
-            if(e.target.innerHTML === 'edit'){
-                console.log(e.target.id);
+            if(e.target.innerHTML === 'Editar'){
+                document.getElementById('title-mdl').innerHTML = 'Modificar registro';
                 instanceModal.open();
                 txtName.disabled = true;
                 btnNewItem.disabled = true;
                 btnNewItem.style.display = 'none';
                 btnEditItem.disabled = false;
                 btnEditItem.style.display = "";
-                const item = getItem(e.target.id);
+                const item = getItem(e.target.value);
                 document.getElementById('name').value = item.name;
                 document.getElementById('slc-type').value = item.type;
                 document.getElementById('price').value = item.price;

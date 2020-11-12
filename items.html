@@ -9,37 +9,55 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col s12 m6">
-                
+    <div class="navbar-fixed">
+        <nav class="nav-extended">
+            <div class="nav-wrapper container">
+                <a href="index.html"><i class="material-icons left">home</i>Inicio</a>
+                <a href="#" data-target="menu-right" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
+                </ul>
             </div>
-            <div class="col s12 m6">
+        </nav>
+    </div>
+
+    <ul class="sidenav" id="menu-right">
+        <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+        <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
+    </ul>
+
+    <div class="container">
+        <div class="row valign-wrapper">
+            <div class="col s12 m6 push-m5">
+                <h3>Gestión de servicios y productos</h3>
                 <div class="row">
                     <div class="col s12 m4">
-                        <div class="card orange darken-2">
+                        <div class="card yellow darken-3 z-depth-3">
                             <div  id="card-services" class="card-content white-text center">
                             </div>
                         </div>
                     </div>
                     <div class="col s12 m4">
-                        <div class="card orange darken-2">
+                        <div class="card cyan z-depth-3">
                             <div  id="card-products" class="card-content white-text center">
                             </div>
                         </div>
                     </div>
                     <div class="col s12 m4">
-                        <div class="card orange darken-2">
+                        <div class="card pink accent-3 z-depth-3">
                             <div  id="card-total" class="card-content white-text center">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row center">
                     <div class="col s12">
-                        <button type="submit" id="btn-newregister">Nuevo registro de producto/servicio</button>
+                        <button type="submit" id="btn-newregister" class="btn-large waves-effect waves-light green accent-4 z-depth-3 width-100"><i class="material-icons left">add</i>Nuevo registro</button>
                     </div>
                 </div>
+            </div>
+            <div class="col s12 m5 pull-m7">
+                <img class="responsive-img" src="img/portadagestion.svg">
             </div>
         </div>
         <div class="row">
@@ -47,42 +65,52 @@
                 <!-- Modal/popup para registro y modificar item-->
                 <div id="modal-items" class="modal">
                     <div class="modal-content">
-                      <h4>Nuevo registro</h4>
-                      <form action="submit" id="form-newitem">
-                        <input type="text" name="name" id="name" maxlength="30" placeholder="Nombre (obligatorio)">
-                        <select name="type" id="slc-type">
-                            <option value="0">Seleccione un tipo (obligatorio)</option>
-                            <option value="servicio">Servicio</option>
-                            <option value="producto">Producto</option>
-                        </select>
-                        <input type="number" name="price" id="price" placeholder="Valor unitario (obligatorio)">
-                    </form>
+                      <h4 id="title-mdl" class="center"></h4>
+                      <div class="row">
+                        <div class="col s12 m5">
+                            <img class="responsive-img" src="img/imagenmodal.svg">
+                        </div>
+                        <div class="col s12 m7">
+                            <form action="submit" id="form-newitem">
+                                <input type="text" name="name" id="name" maxlength="30" placeholder="Nombre (obligatorio)">
+                                <select name="type" id="slc-type">
+                                    <option value="0">Seleccione un tipo (obligatorio)</option>
+                                    <option value="servicio">Servicio</option>
+                                    <option value="producto">Producto</option>
+                                </select>
+                                <input type="number" name="price" id="price" placeholder="Valor unitario (obligatorio)">
+                            </form>
+                        </div>
+                      </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="btn-newitem">Ingresar</button>
-                        <button type="submit" id="btn-edititem" disabled>Modificar</button>
-                        <button type="submit" id="btn-cancel">Cancelar</button>
+                        <button type="submit" id="btn-newitem" class="btn waves-effect waves-light green accent-4">Ingresar</button>
+                        <button type="submit" id="btn-edititem" class="btn waves-effect waves-light" disabled>Modificar</button>
+                        <button type="submit" id="btn-cancel" class="btn waves-effect waves-light orange">Cancelar</button>
                     </div>
                   </div>
             </div>
         </div>
+        <h3>Listado de items</h3>
+        <div class="row">
+            <div class="col s12">
+                <table class="responsive-table z-depth-3 striped centered">
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Eliminar</th>
+                        <th>Editar</th>
+                    </thead>
+                    <tbody id="tbl-content">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <table>
-        <thead>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Precio</th>
-            <th>Eliminar</th>
-            <th>Editar</th>
-        </thead>
-        <tbody id="tbl-content">
-            
-        </tbody>
-    </table>
-    <div id="indicator-content">
-
-    </div>
-    <script src="js/appItems.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/appItems.js"></script>
+    
 </body>
 </html>

@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <a href="cotizaciones.html">Cotizaciones</a>
-    <a href="items.html">Items (servicios/productos)</a>
+    <div class="navbar-fixed">
+        <nav class="nav-extended">
+            <div class="nav-wrapper container">
+                <a href="index.html"><i class="material-icons left">home</i>Inicio</a>
+                <a href="#" data-target="menu-right" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <ul class="sidenav" id="menu-right">
+        <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+        <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
+    </ul>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m4">
+                <a href="items.html">Items (servicios/productos)</a>
+            </div>
+            <div class="col s12 m4">
+                <a href="cotizaciones.html">Cotizaciones</a>
+            </div>
+            <div class="col s12 m4">
+                <a href="items.html">Items (servicios/productos)</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/appIndex.js"></script>
 </body>
 </html>
