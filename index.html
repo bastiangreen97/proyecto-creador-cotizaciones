@@ -13,33 +13,67 @@
         <nav class="nav-extended">
             <div class="nav-wrapper container">
                 <a href="index.html"><i class="material-icons left">home</i>Inicio</a>
-                <a href="#" data-target="menu-right" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
+                <a href="#" data-target="menu-right-index" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
                 <ul class="right hide-on-med-and-down">
+                    <li><a href="items.html"><i class="material-icons left">widgets</i>Gestión de servicios y productos</a></li>
                     <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
                 </ul>
             </div>
         </nav>
     </div>
 
-    <ul class="sidenav" id="menu-right">
+    <ul class="sidenav" id="menu-right-index">
         <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+        <li><a href="items.html"><i class="material-icons left">widgets</i>Gestión de servicios y productos</a></li>
+        <li><div class="section"></div></li>
         <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
     </ul>
 
-    
+
     <div class="container">
-        <div class="row">
-            <div class="col s12 m4">
-                <a href="items.html">Items (servicios/productos)</a>
+        <div class="row valign-wrapper">
+            <div class="col s12 m6">
+                <h2>Proyecto creador de cotizaciones</h2>
+                <p>Este proyecto tiene como objetivo brindar una pequeña ayuda a pymes y emprendedores que no cuenten con un sistema que les permita realizar cotizaciones, facilitando la creación de estas, cabe destacar que este sistema no reemplaza a uno de ventas, ni la cotización a una boleta.
+                </p>
             </div>
-            <div class="col s12 m4">
-                <a href="cotizaciones.html">Cotizaciones</a>
-            </div>
-            <div class="col s12 m4">
-                <a href="items.html">Items (servicios/productos)</a>
+            <div class="col s12 m6">
+                <div class="section"></div>
+                <img src="img/imageninicio.svg" class="responsive-img">
             </div>
         </div>
     </div>
+    <div class="width-100 back-purple-gradient">
+        <div class="container">
+            <div class="row center">
+                <div class="col s12 m4">
+                    <div class="card transparent without-shadow">
+                        <div class="card-content white-text center">
+                            <img src="img/puesta-en-marcha.png" class="card-icon">
+                            <p>Comienza registrando tus productos y/o servicios para poder utilizarlos en tus futuras cotizaciones</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card transparent without-shadow">
+                        <div class="card-content white-text center">
+                            <img src="img/inscripcion.png" class="card-icon">
+                            <p>Crea cotizaciones según lo solicitado por tus clientes, puedes combinar servicios con productos, o solo hacer de un tipo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card transparent without-shadow">
+                        <div class="card-content white-text center">
+                            <img src="img/archivo-pdf.png" class="card-icon">
+                            <p>Una vez que termines de crear una cotización puedes descargarla en formato PDF para ser impresa o enviada por distintos medios como whatsapp, correo, messenger, etc. a tu cliente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/appIndex.js"></script>
 </body>
 </html>

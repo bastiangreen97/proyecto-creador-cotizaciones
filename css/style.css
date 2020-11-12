@@ -16,7 +16,21 @@ nav{
     width: 80% !important;
 }
 
-h3,h4{
+.back-purple-gradient{
+    background: rgb(21,19,25);
+    background: linear-gradient(259deg, rgba(21,19,25,1) 0%, rgba(152,128,208,1) 76%);
+}
+
+.back-yellow-gradient{
+    background: rgb(255,140,73);
+    background: linear-gradient(259deg, rgba(255,140,73,1) 0%, rgba(255,226,120,1) 76%);
+}
+
+.without-shadow{
+    box-shadow: none;
+}
+
+h2,h3,h4{
     font-family: 'Amatic SC', cursive;
     text-shadow: 4px 4px 4px rgba(150, 150, 150, 1);
     text-align: center;
