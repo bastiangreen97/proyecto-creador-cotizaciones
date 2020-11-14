@@ -1,7 +1,15 @@
 //Llama y guarda el array junto a sus objetos almacenados desde el localstorage
 let items2 = JSON.parse(localStorage.getItem('arrayItems')) || [];
-const autor = localStorage.getItem('infoAutor') || [];
+const autor = JSON.parse(localStorage.getItem('infoAutor')) || [];
+const client = JSON.parse(localStorage.getItem('infoClient')) || [];
 const tab = document.getElementById('tabs-quotation');
+const tab1 = document.getElementById('tab-1');
+const tab2 = document.getElementById('tab-2');
+const tab3 = document.getElementById('tab-3');
+const formAutorClient = document.getElementById('form-autor-client');
+const btnContinueTab1 = document.getElementById('btn-tab-1');
+const btnAddItem = document.getElementById('btn-addItem');
+const btnContinueTab2 = document.getElementById('btn-tab-2');
 const quotationItems = [];
 //Obtiene el elemento autocomplete
 const autoCompleteInput = document.getElementById('autocomplete-input');
@@ -38,12 +46,73 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 //Crea un objeto para almacenar todos los datos de la cotización
-const newQuotation = (autor, name, ) => {
+const newQuotation = (autor, client, ) => {
 
 }
 
-//Validar que todos los campos se encuentren con datos
-const formValidator = () =>{
+const newPerson = (name, cel, email, address) => {
+    const person = {
+        name: name,
+        cel: cel,
+        email: email,
+        address: address
+    }
+    return person;
+}
+
+//Validar que todos los campos de autor y cliente se encuentren con datos
+const formAutorClientValidator = () =>{
+    const autorName = document.getElementById('autor-name').value;
+    const autorCel = document.getElementById('autor-cel').value;
+    const autorEmail = document.getElementById('autor-email').value;
+    const autorAddress = document.getElementById('autor-address').value;
+    const clientName = document.getElementById('client-name').value;
+    const clientCel = document.getElementById('client-cel').value;
+    const clientAddress = document.getElementById('client-address').value;
+    const clientEmail = document.getElementById('client-email').value;
+
+    const expRegCel = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
+
+    if(autorName == '' || autorName.length == 0){
+        M.toast({html: `Debe ingresar su nombre o el de su pyme`});
+        document.getElementById('autor-name').focus();
+        return false;
+    }else if(autorCel == 0 || autorCel.length == 0){
+        M.toast({html: `Debe ingresar un número de celular`});
+        document.getElementById('autor-cel').focus();
+        return false;
+    }else if(expRegCel.test(autorCel) != true){
+        M.toast({html: `Debe ingresar un número de celular válido`});
+        document.getElementById('autor-cel').focus();
+        return false;
+    }else if(autorEmail == '' || autorEmail.length == 0){
+        M.toast({html: `Debe ingresar su email`});
+        document.getElementById('autor-email').focus();
+        return false;
+    }else if(clientName == '' || clientName.length == 0){
+        M.toast({html: `Debe ingresar el nombre del cliente`});
+        document.getElementById('client-name').focus();
+        return false;
+    }else if(clientCel == 0 || clientCel.length == 0){
+        M.toast({html: `Debe ingresar el número de celular del cliente`});
+        document.getElementById('client-cel').focus();
+        return false;
+    }else if(expRegCel.test(clientCel) != true){
+        M.toast({html: `Debe ingresar un número de celular válido`});
+        document.getElementById('client-cel').focus();
+        return false;
+    }else if(clientEmail == '' || clientEmail.length == 0){
+        M.toast({html: `Debe ingresar el email del cliente`});
+        document.getElementById('client-name').focus();
+        return false;
+    }else{
+        return true;
+    }
+
+}
+
+//Validar que todos los campos del form quotation se encuentren con datos
+const formItemValidator = () =>{
     const name = document.getElementById('result-name').value;
     const type = document.getElementById('result-type').value;
     const price = document.getElementById('result-price').value;
@@ -100,5 +169,42 @@ const addItemQuotation = (auxItem, discount, percent, quantity) =>{
 
 window.onload = () =>{
     const instanceAuto = M.Autocomplete.getInstance(autoCompleteInput);
+    const instanceTab2 = M.Tabs.getInstance(tab);
     instanceAuto.updateData(itemNames());
+
+    btnContinueTab1.addEventListener('click', (e) => {
+        e.preventDefault;
+        if(formAutorClientValidator()){
+            const autorName = document.getElementById('autor-name').value;
+            const autorCel = document.getElementById('autor-cel').value;
+            const autorEmail = document.getElementById('autor-email').value;
+            const autorAddress = document.getElementById('autor-address').value;
+            const clientName = document.getElementById('client-name').value;
+            const clientCel = document.getElementById('client-cel').value;
+            const clientAddress = document.getElementById('client-address').value;
+            const clientEmail = document.getElementById('client-email').value;
+
+            const auxAutor = newPerson(autorName, autorCel, autorEmail, autorAddress);
+            localStorage.setItem('infoAutor', JSON.stringify(auxAutor));
+            const auxClient = newPerson(clientName, clientCel, clientEmail, clientAddress);
+            localStorage.setItem('infoClient', JSON.stringify(auxClient));
+            tab.children[1].classList.remove('disabled');
+            instanceTab2.select('tab-2');
+            M.toast({html: `Se han guardado tus datos y los del cliente`});
+        }
+    });
+
+    btnAddItem.addEventListener('click', (e) => {
+        e.preventDefault;
+        if(formItemValidator()){
+
+        }
+    })
+
+    btnContinueTab2.addEventListener('click', (e) => {
+        e.preventDefault;
+
+    })
+
+
 }
