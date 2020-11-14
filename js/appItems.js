@@ -110,6 +110,33 @@ const indicatorTemplate = () => {
     `;
 }
 
+const formValidator = () => {
+    const name = document.getElementById('name').value;
+    const type = document.getElementById('slc-type').value;
+    const price = document.getElementById('price').value;
+    const find = findItem(name);
+
+    if(name == '' || name.length == 0){
+        M.toast({html: `Debe ingresar un nombre`});
+        document.getElementById('name').focus();
+        return false;
+    }else if(find){
+        M.toast({html: `Ya existe un producto/servicio registrado con el nombre: ${name}`});
+        document.getElementById('name').focus();
+        return false;
+    }else if(type == 0){
+        M.toast({html: `Debe seleccionar un tipo`});
+        document.getElementById('slc-type').focus();
+        return false;
+    }else if(price == 0 || price == null){
+        M.toast({html: `Debe ingresar un valor mayor a 0`});
+        document.getElementById('price').focus();
+        return false;
+    }else{
+        return true;
+    }
+}
+
 //Inicia los componentes de materialize
 document.addEventListener('DOMContentLoaded', function() {
     const elemsMdl = document.querySelectorAll('.modal');
@@ -149,21 +176,9 @@ window.onload = () => {
         const name = document.getElementById('name').value;
         const type = document.getElementById('slc-type').value;
         const price = document.getElementById('price').value;
-        const find = findItem(name);
+        const validator = formValidator();
 
-        if(name == '' || name.length == 0){
-            alert('Debe ingresar un nombre');
-            document.getElementById('name').focus();
-        }else if(find){
-            M.toast({html: `Ya existe un producto/servicio registrado con el nombre: ${name}`});
-            document.getElementById('name').focus();
-        }else if(type == 0){
-            alert('Debe seleccionar un tipo');
-            document.getElementById('slc-type').focus();
-        }else if(price == 0 || price == null){
-            alert('Debe ingresar un valor mayor a 0');
-            document.getElementById('price').focus();
-        }else{
+        if(validator){
             newItem(name,type,price);
             M.toast({html: `El ${type} con nombre: ${name} fue registrado correctamente`});
             elementsTemplate();
@@ -196,8 +211,6 @@ window.onload = () => {
 
         //TODO: Aplicar correción a los botones y values
         e.preventDefault();
-        console.log(e.target.innerHTML);
-        console.log(e.target.value);
         if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
             if(e.target.innerHTML === 'Eliminar'){
                 deleteItem(e.target.value);

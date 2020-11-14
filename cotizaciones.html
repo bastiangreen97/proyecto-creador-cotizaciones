@@ -33,7 +33,7 @@
             <div class="col s12">
                 <ul id="tabs-quotation" class="tabs">
                     <li class="tab col s4"><a class="active" href="#autor-and-client">1. Datos del emisor y cliente</a></li>
-                    <li class="tab col s4"><a href="#items-quotation" disable>2. Productos y/o servicios a cotizar</a></li>
+                    <li class="tab col s4"><a href="#items-quotation" disable>2. Cotización</a></li>
                     <li class="tab col s4"><a href="#pdf-generate">3. Generar pdf</a></li>
                 </ul>
             </div>
@@ -95,15 +95,65 @@
     <div id="items-quotation" class="container">
         <div class="row">
             <div class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <i class="material-icons prefix">textsms</i>
-                  <input type="text" id="autocomplete-input" class="autocomplete">
-                  <label for="autocomplete-input">Nombre del servicio o producto</label>
+                <div class="row">
+                    <div class="input-field col s8">
+                    <i class="material-icons prefix">textsms</i>
+                    <input type="text" name="autocomplete-input" id="autocomplete-input" class="autocomplete" onchange="showItem(this.value)">
+                    <label for="autocomplete-input">Nombre del servicio o producto</label>
+                    </div>
+                    <div class="col s4">
+                        <button>Agregar</button>
+                    </div>
                 </div>
-              </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field">
+                            <input type="text" name="result-name" id="result-name" placeholder="" disabled>
+                            <label for="result-name">Nombre</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" name="result-type" id="result-type" placeholder="" disabled>
+                            <label for="result-type">Tipo</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" name="result-price" id="result-price" placeholder="" disabled>
+                            <label for="result-price">Valor unitario</label>
+                        </div>
+                            <label>Agregar descuento al producto/servicio</label>
+                            <select id="slc-discount">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                        <div class="input-field">
+                            <input type="number" name="percent" id="percent">
+                            <label for="percent">% De descuento (Omita este campo si no aplica descuento)</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="number" name="quantity" id="quantity">
+                            <label for="quantity">Cantidad del producto/servicio (obligatorio)</label>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="row">
+                <div class="col s12">
+                    <table>
+                        <thead>
+                            <th>Producto</th>
+                            <th>Tipo</th>
+                            <th>Precio unitario</th>
+                            <th>Descuento</th>
+                            <th>%</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="pdf-generate" class="col s12 green">Test 3</div>
