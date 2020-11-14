@@ -201,7 +201,7 @@ window.onload = () => {
         if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
             if(e.target.innerHTML === 'Eliminar'){
                 deleteItem(e.target.value);
-                M.toast({html: `El item: ${e.target.value} fue eliminado`});
+                M.toast({html: `El item: ${e.target.value} fue eliminado`, classes:'black'});
                 elementsTemplate();            
             }
             if(e.target.innerHTML === 'Editar'){

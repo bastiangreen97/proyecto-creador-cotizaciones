@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="">
     <title>Gestor de items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -75,14 +76,20 @@
                             <img class="responsive-img" src="img/imagenmodal.svg">
                         </div>
                         <div class="col s12 m7">
-                            <form action="submit" id="form-newitem">
-                                <input type="text" name="name" id="name" maxlength="30" placeholder="Nombre (obligatorio)">
+                            <form id="form-newitem">
+                                <div class="input-field">
+                                    <input type="text" name="name" id="name" maxlength="30">
+                                    <label for="name">Nombre producto/servicio (obligatorio)</label>
+                                </div>
                                 <select name="type" id="slc-type">
                                     <option value="0">Seleccione un tipo (obligatorio)</option>
                                     <option value="servicio">Servicio</option>
                                     <option value="producto">Producto</option>
                                 </select>
-                                <input type="number" name="price" id="price" placeholder="Valor unitario (obligatorio)">
+                                <div class="input-field">
+                                    <input type="number" name="price" id="price">
+                                    <label for="price">Valor unitario (obligatorio)</label>
+                                </div>
                             </form>
                         </div>
                       </div>

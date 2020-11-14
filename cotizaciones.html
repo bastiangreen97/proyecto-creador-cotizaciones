@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="">
     <title>Gestor de cotizaciones</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
     <div class="navbar-fixed">
         <nav class="nav-extended">
             <div class="nav-wrapper container">
                 <a href="index.html"><i class="material-icons left">home</i>Inicio</a>
-                <a href="#" data-target="menu-right-index" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
+                <a href="#" data-target="menu-right-cotizaciones" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="items.html"><i class="material-icons left">widgets</i>Gestión de servicios y productos</a></li>
                 </ul>
@@ -21,25 +23,93 @@
         </nav>
     </div>
 
-    <ul class="sidenav" id="menu-right-index">
+    <ul class="sidenav" id="menu-right-cotizaciones">
         <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
         <li><a href="items.html"><i class="material-icons left">widgets</i>Gestión de servicios y productos</a></li>
-        <li><div class="section"></div></li>
     </ul>
 
     <div class="container">
         <div class="row">
-            <div class="col s12 m6">
-
-            </div>
-            <div class="col s12 m6">
-
+            <div class="col s12">
+                <ul id="tabs-quotation" class="tabs">
+                    <li class="tab col s4"><a class="active" href="#autor-and-client">1. Datos del emisor y cliente</a></li>
+                    <li class="tab col s4"><a href="#items-quotation" disable>2. Productos y/o servicios a cotizar</a></li>
+                    <li class="tab col s4"><a href="#pdf-generate">3. Generar pdf</a></li>
+                </ul>
             </div>
         </div>
     </div>
+    
+    <div id="autor-and-client" class="container">
+        <form>
+            <div class="row">
+                <h5>Datos del emisor</h5>
+                <div class="col s12 m6">
+                    <div class="input-field">
+                        <input type="text" name="autor-name" id="autor-name">
+                        <label for="autor-name">Nombre persona o empresa (obligatorio)</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" name="autor-cel" id="autor-cel">
+                        <label for="autor-cel">Celular o teléfono (obligatorio)</label>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="input-field">
+                        <input type="email" name="autor-email" id="autor-email">
+                        <label for="autor-email">Email (obligatorio)</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" name="autor-address" id="autor-address">
+                        <label for="autor-name">Dirección</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h5>Datos del cliente</h5>
+                <div class="col s12 m6">
+                    <div class="input-field">
+                        <input type="text" name="client-name" id="client-name">
+                        <label for="client-name">Nombre cliente (obligatorio)</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" name="client-cel" id="client-cel">
+                        <label for="client-cel">Celular o teléfono (obligatorio)</label>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="input-field">
+                        <input type="email" name="client-email" id="client-email">
+                        <label for="client-email">Email (obligatorio)</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" name="client-address" id="client-address">
+                        <label for="client-name">Dirección</label>
+                    </div>
+                </div>
+                <button>Guardar</button>
+            </div>
+        </form>
+    </div>
 
+    <div id="items-quotation" class="container">
+        <div class="row">
+            <div class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">textsms</i>
+                  <input type="text" id="autocomplete-input" class="autocomplete">
+                  <label for="autocomplete-input">Nombre del servicio o producto</label>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="pdf-generate" class="col s12 green">Test 3</div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/appCotizaciones.js"></script>
 </body>
 </html>
