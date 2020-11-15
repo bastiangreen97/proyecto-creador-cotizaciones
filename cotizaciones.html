@@ -94,7 +94,7 @@
 
     <div id="tab-2" class="container">
         <div id="modal-items-quotation" class="modal">
-            <div class="modal-content">
+            <form id="form-items-quotation" class="modal-content">
                 <h4 class="center">Agregar productos y/o servicios a la cotización</h4>
                 <div class="row">
                     <div class="input-field col s11">
@@ -103,14 +103,6 @@
                         <label for="autocomplete-input">Escriba nombre del servicio o producto</label>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" id="btn-newitem" class="btn waves-effect waves-light green accent-4">Ingresar</button>
-                <button type="submit" id="btn-cancel" class="btn waves-effect waves-light orange">Cancelar</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="input-field">
@@ -133,19 +125,30 @@
                             <option value="1">Si</option>
                         </select>
                         <div class="input-field">
-                            <input type="number" name="percent" id="percent">
+                            <input type="number" name="percent" id="percent" value="0">
                             <label for="percent">% De descuento (Omita este campo si no aplica descuento)</label>
                         </div>
                         <div class="input-field">
-                            <input type="number" name="quantity" id="quantity" min="1" max="999">
+                            <input type="number" name="quantity" id="quantity" min="1" max="999" value="1">
                             <label for="quantity">Cantidad del producto/servicio (obligatorio)</label>
                         </div>
                     </div>
                 </div>
+            </form>
+            <div class="modal-footer">
+                <button type="submit" id="btn-insertitem" class="btn waves-effect waves-light green accent-4">Ingresar</button>
+                <button type="submit" id="btn-cancelitem" class="btn waves-effect waves-light orange">Cancelar</button>
             </div>
         </div>
         <div class="row">
-            <h5>Detalle cotización</h5>
+            <div class="col s6">
+                <h4>Detalle cotización</h4>
+            </div>
+            <div class="col s6">
+                <button type="submit" id="btn-additem">Agregar producto o servicio</button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col s12">
                 <table class="responsive">
                     <thead>

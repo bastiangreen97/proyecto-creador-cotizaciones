@@ -8,7 +8,12 @@ const tab2 = document.getElementById('tab-2');
 const tab3 = document.getElementById('tab-3');
 const formAutorClient = document.getElementById('form-autor-client');
 const btnContinueTab1 = document.getElementById('btn-tab-1');
-const btnAddItem = document.getElementById('btn-addItem');
+const btnAddItem = document.getElementById('btn-additem');
+const modalQuotation = document.getElementById('modal-items-quotation');
+const formQuotation = document.getElementById('form-items-quotation');
+const btnInsertItem = document.getElementById('btn-insertitem');
+const btnCancelItem = document.getElementById('btn-cancelitem');
+const quotationTable = document.getElementById('quotation-table')
 const btnContinueTab2 = document.getElementById('btn-tab-2');
 const quotationItems = [];
 //Obtiene el elemento autocomplete
@@ -43,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const elemsSlc = document.querySelectorAll('select');
     const instancesSlc = M.FormSelect.init(elemsSlc);
     const instance = M.Tabs.init(tab);
+    const elemsMdl = document.querySelectorAll('.modal');
+    const instancesMdl = M.Modal.init(elemsMdl);
     });
 
 //Crea un objeto para almacenar todos los datos de la cotización
@@ -58,6 +65,55 @@ const newPerson = (name, cel, email, address) => {
         address: address
     }
     return person;
+}
+
+//Obtiene un item según su nombre
+const getItem = (name) => {
+    const item = items2.find(element => element.name === name);
+    return item;
+}
+
+//Inserta un item a la cotización
+const addItemQuotation = (name, type, price, discount, percent, quantity) =>{
+    let priceWithDiscount = 0;
+    let subTotal = 0;
+
+    if(discount == 1){
+        priceWithDiscount = Math.round(price - (percent/100) * price)
+        subTotal = priceWithDiscount * quantity;
+    }
+    else{
+        subTotal = price * quantity;
+    }
+
+    const item = {
+        name: name,
+        type: type,
+        price: price,
+        discount: discount,
+        percent: percent,
+        quantity: quantity,
+        subTotal: subTotal
+    }
+    quotationItems.push(item);
+}
+
+const tableTemplate = () => {
+    quotationTable.innerHTML = '';
+    //TODO: Aplicar correción a los botones
+    quotationItems.forEach(element => {
+        quotationTable.innerHTML += `
+            <tr>
+                <td>${element.name}</td>
+                <td>${element.type}</td>
+                <td>${element.price}</td>
+                <td>${element.discount}</td>
+                <td>${element.percent}</td>
+                <td>${element.quantity}</td>
+                <td>${element.subTotal}</td>
+            </tr>
+        `;
+    });
 }
 
 //Validar que todos los campos de autor y cliente se encuentren con datos
@@ -108,19 +164,17 @@ const formAutorClientValidator = () =>{
     }else{
         return true;
     }
-
 }
 
 //Validar que todos los campos del form quotation se encuentren con datos
 const formItemValidator = () =>{
     const name = document.getElementById('result-name').value;
-    const type = document.getElementById('result-type').value;
-    const price = document.getElementById('result-price').value;
     const discount = document.getElementById('slc-discount').value;
     const percent = document.getElementById('percent').value;
     const quantity = document.getElementById('quantity').value;
+    const find = getItem(name);
 
-    if(name,type, price == '' || name.length, type.length, price.length < 0){
+    if(name == '' || name.length < 0){
         M.toast({html: `No ha seleccionado un producto o servicio`});
         document.getElementById('autocomplete-input').focus();
         return false;
@@ -138,38 +192,11 @@ const formItemValidator = () =>{
     }
 }
 
-//Obtiene un item según su nombre
-const getItem = (name) => {
-    const item = items2.find(element => element.name === name);
-    return item;
-}
-
-//Inserta un item a la cotización
-const addItemQuotation = (auxItem, discount, percent, quantity) =>{
-    let subTotal = 0;
-
-    if(discount){
-        subTotal = (auxItem.price * quantity) - (price * quantity) * percent;
-    }
-    else{
-        subTotal = auxItem.price * quantity;
-    }
-
-    const item = {
-        name: auxItem.name,
-        type: auxItem.type,
-        price: auxItem.price,
-        discount: discount,
-        percent: percent,
-        quantity: quantity,
-        subTotal: subTotal
-    }
-    quotationItems.push(item);
-}
 
 window.onload = () =>{
     const instanceAuto = M.Autocomplete.getInstance(autoCompleteInput);
     const instanceTab2 = M.Tabs.getInstance(tab);
+    const instanceModal = M.Modal.getInstance(modalQuotation);
     instanceAuto.updateData(itemNames());
 
     btnContinueTab1.addEventListener('click', (e) => {
@@ -196,15 +223,34 @@ window.onload = () =>{
 
     btnAddItem.addEventListener('click', (e) => {
         e.preventDefault;
-        if(formItemValidator()){
+        formQuotation.reset();
+        instanceModal.open();
+    });
 
+    btnInsertItem.addEventListener('click', (e) => {
+        e.preventDefault;
+        if(formItemValidator()){
+            const name = document.getElementById('result-name').value;
+            const type = document.getElementById('result-type').value;
+            const price = document.getElementById('result-price').value;
+            const discount = document.getElementById('slc-discount').value;
+            const percent = document.getElementById('percent').value;
+            const quantity = document.getElementById('quantity').value;
+            addItemQuotation(name, type, price, discount, percent, quantity);
+            M.toast({html: `Se ha insertado correctamente el ${type} ${name} en la cotización`}); 
         }
+    });
+
+    btnCancelItem.addEventListener('click', (e) => {
+        e.preventDefault;
+        formQuotation.reset();
+        instanceModal.close();
     })
 
     btnContinueTab2.addEventListener('click', (e) => {
         e.preventDefault;
 
-    })
+    });
 
 
 }
