@@ -77,15 +77,19 @@
                         </div>
                         <div class="col s12 m7">
                             <form id="form-newitem">
-                                    <label>Nombre producto/servicio (obligatorio)</label>
-                                    <input type="text" name="name" id="name" maxlength="30">
+                                <div class="input-field">
+                                    <input type="text" name="name" id="name" maxlength="30" placeholder=" ">
+                                    <label for="name">Nombre producto/servicio (obligatorio)</label>
+                                </div>
                                     <select name="type" id="slc-type">
                                         <option value="0">Seleccione un tipo (obligatorio)</option>
                                         <option value="servicio">Servicio</option>
                                         <option value="producto">Producto</option>
                                     </select>
-                                    <label>Precio (obligatorio)</label>
-                                    <input type="number" name="price" id="price">
+                                <div class="input-field">  
+                                    <input type="number" name="price" id="price" placeholder=" "> 
+                                    <label for="price">Precio</label>
+                                </div>
                             </form>
                         </div>
                       </div>
