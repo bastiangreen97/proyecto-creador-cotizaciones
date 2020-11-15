@@ -93,20 +93,26 @@
     </div>
 
     <div id="tab-2" class="container">
+        <div id="modal-items-quotation" class="modal">
+            <div class="modal-content">
+                <h4 class="center">Agregar productos y/o servicios a la cotización</h4>
+                <div class="row">
+                    <div class="input-field col s11">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" name="autocomplete-input" id="autocomplete-input" class="autocomplete" onchange="showItem(this.value)">
+                        <label for="autocomplete-input">Escriba nombre del servicio o producto</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btn-newitem" class="btn waves-effect waves-light green accent-4">Ingresar</button>
+                <button type="submit" id="btn-cancel" class="btn waves-effect waves-light orange">Cancelar</button>
+            </div>
+        </div>
         <div class="row">
             <div class="col s12">
                 <div class="row">
-                    <div class="input-field col s8">
-                    <i class="material-icons prefix">textsms</i>
-                    <input type="text" name="autocomplete-input" id="autocomplete-input" class="autocomplete" onchange="showItem(this.value)">
-                    <label for="autocomplete-input">Nombre del servicio o producto</label>
-                    </div>
-                    <div class="col s4">
-                        <button type="submit" id="btn-addItem">Agregar</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
+                    <div class="col s12 m6">
                         <div class="input-field">
                             <input type="text" name="result-name" id="result-name" placeholder="" disabled>
                             <label for="result-name">Nombre</label>
@@ -119,11 +125,13 @@
                             <input type="number" name="result-price" id="result-price" placeholder="" disabled>
                             <label for="result-price">Valor unitario</label>
                         </div>
-                            <label>Agregar descuento al producto/servicio</label>
-                            <select id="slc-discount">
-                                <option value="0">No</option>
-                                <option value="1">Si</option>
-                            </select>
+                    </div>
+                    <div class="col s12 m6">
+                        <label>Agregar descuento al producto/servicio</label>
+                        <select id="slc-discount">
+                            <option value="0">No</option>
+                            <option value="1">Si</option>
+                        </select>
                         <div class="input-field">
                             <input type="number" name="percent" id="percent">
                             <label for="percent">% De descuento (Omita este campo si no aplica descuento)</label>
@@ -135,26 +143,27 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col s12">
-                    <table>
-                        <thead>
-                            <th>Producto</th>
-                            <th>Tipo</th>
-                            <th>Precio unitario</th>
-                            <th>Descuento</th>
-                            <th>%</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
-        <button type="submit" id="btn-tab-2">Guardar y continuar</button>
+        <div class="row">
+            <h5>Detalle cotización</h5>
+            <div class="col s12">
+                <table class="responsive">
+                    <thead>
+                        <th>Producto</th>
+                        <th>Tipo</th>
+                        <th>Precio unitario</th>
+                        <th>Descuento</th>
+                        <th>%</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </thead>
+                    <tbody id="quotation-table">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" id="btn-tab-2">Guardar y continuar</button>
+        </div>
     </div>
 
     <div id="tab-3" class="container">Test 3</div>

@@ -220,15 +220,15 @@ window.onload = () => {
             if(e.target.innerHTML === 'Editar'){
                 document.getElementById('title-mdl').innerHTML = 'Modificar registro';
                 instanceModal.open();
+                const item = getItem(e.target.value);
                 txtName.disabled = true;
+                document.getElementById('name').value = item.name;
+                document.getElementById('slc-type').value = item.type;
+                document.getElementById('price').value = item.price;
                 btnNewItem.disabled = true;
                 btnNewItem.style.display = 'none';
                 btnEditItem.disabled = false;
                 btnEditItem.style.display = "";
-                const item = getItem(e.target.value);
-                document.getElementById('name').value = item.name;
-                document.getElementById('slc-type').value = item.type;
-                document.getElementById('price').value = item.price;
             }
         }
     })
