@@ -1,7 +1,9 @@
+
+window.jsPDF = window.jspdf.jsPDF;
 //Llama y guarda el array junto a sus objetos almacenados desde el localstorage
 let items2 = JSON.parse(localStorage.getItem('arrayItems')) || [];
-const autor = JSON.parse(localStorage.getItem('infoAutor')) || [];
-const client = JSON.parse(localStorage.getItem('infoClient')) || [];
+let autor = {};
+let client = {};
 const tab = document.getElementById('tabs-quotation');
 const tab1 = document.getElementById('tab-1');
 const tab2 = document.getElementById('tab-2');
@@ -14,11 +16,24 @@ const formQuotation = document.getElementById('form-items-quotation');
 const btnInsertItem = document.getElementById('btn-insertitem');
 const btnCancelItem = document.getElementById('btn-cancelitem');
 const quotationTable = document.getElementById('quotation-table')
+const totalQuotation = document.getElementById('card-total');
 const btnContinueTab2 = document.getElementById('btn-tab-2');
+const btnPdf = document.getElementById('btn-pdf');
 const quotationItems = [];
+let quotation = {};
 //Obtiene el elemento autocomplete
 const autoCompleteInput = document.getElementById('autocomplete-input');
 
+//Retorna verdadero si ya se encuentra un item registrado con el mismo nombre
+const findItemQuotation = (name) => {
+    let find = false;
+    quotationItems.find((element) => {
+        if(element.name.toLowerCase() == name.toLowerCase()){
+            find = true;
+        }
+    });
+    return find;
+}
 //Retorna un objeto con los nombres de productos/servicios como atributos, y valores null (Null porque materialize en este valor permite agregar iconos);
 const itemNames = () => {
     let dataNames = new Object();
@@ -53,8 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 //Crea un objeto para almacenar todos los datos de la cotización
-const newQuotation = (autor, client, ) => {
-
+const newQuotation = (date, autor, client, listItems) => {
+    const quotation = {
+        date: date,
+        autor: autor,
+        client: client,
+        listItems: listItems
+    }
+    return quotation;
 }
 
 const newPerson = (name, cel, email, address) => {
@@ -78,11 +99,13 @@ const addItemQuotation = (name, type, price, discount, percent, quantity) =>{
     let priceWithDiscount = 0;
     let subTotal = 0;
 
-    if(discount == 1){
+    if(discount == '1'){
         priceWithDiscount = Math.round(price - (percent/100) * price)
         subTotal = priceWithDiscount * quantity;
     }
     else{
+        percent = 0;
+        priceWithDiscount = price;
         subTotal = price * quantity;
     }
 
@@ -90,12 +113,17 @@ const addItemQuotation = (name, type, price, discount, percent, quantity) =>{
         name: name,
         type: type,
         price: price,
-        discount: discount,
         percent: percent,
+        priceDiscount: priceWithDiscount,
         quantity: quantity,
         subTotal: subTotal
     }
     quotationItems.push(item);
+}
+
+const elementsTemplate = () => {
+    tableTemplate();
+    totalTemplate();
 }
 
 const tableTemplate = () => {
@@ -107,13 +135,25 @@ const tableTemplate = () => {
                 <td>${element.name}</td>
                 <td>${element.type}</td>
                 <td>${element.price}</td>
-                <td>${element.discount}</td>
-                <td>${element.percent}</td>
+                <td>${element.percent}%</td>
+                <td>${element.priceDiscount}</td>
                 <td>${element.quantity}</td>
                 <td>${element.subTotal}</td>
             </tr>
         `;
     });
+}
+
+const totalTemplate = () => {
+    totalQuotation.innerHTML = '';
+    let total = 0;
+    quotationItems.forEach(element => {
+        total = element.subTotal + total;
+    });
+
+    return totalQuotation.innerHTML = `
+        <p>Total: $${total}</p>
+    `;
 }
 
 //Validar que todos los campos de autor y cliente se encuentren con datos
@@ -172,10 +212,14 @@ const formItemValidator = () =>{
     const discount = document.getElementById('slc-discount').value;
     const percent = document.getElementById('percent').value;
     const quantity = document.getElementById('quantity').value;
-    const find = getItem(name);
+    const find = findItemQuotation(name);
 
     if(name == '' || name.length < 0){
         M.toast({html: `No ha seleccionado un producto o servicio`});
+        document.getElementById('autocomplete-input').focus();
+        return false;
+    }else if(find){
+        M.toast({html: `Ya ha insertado el producto/servicio con nombre: ${name}`});
         document.getElementById('autocomplete-input').focus();
         return false;
     }else if((discount == '1' && percent == null) || (discount == '1' && percent == 0)){
@@ -192,12 +236,27 @@ const formItemValidator = () =>{
     }
 }
 
+const createPDF = () => {
+    let docName = ''
+    let clientName = quotation.client.name;
+    let date = '';
+    date = quotation.date.getDate().toString() + '-' + quotation.date.getMonth().toString() + '-' + quotation.date.getFullYear().toString();
+    docName = clientName + ' ' + date;
+
+    var doc = new jsPDF();
+
+    let templateHTML = '';
+    templateHTML += '<div width="50%"></div>'
+    doc.save(docName+'.pdf');
+}
+
 
 window.onload = () =>{
     const instanceAuto = M.Autocomplete.getInstance(autoCompleteInput);
-    const instanceTab2 = M.Tabs.getInstance(tab);
+    const instanceTab = M.Tabs.getInstance(tab);
     const instanceModal = M.Modal.getInstance(modalQuotation);
     instanceAuto.updateData(itemNames());
+    elementsTemplate();
 
     btnContinueTab1.addEventListener('click', (e) => {
         e.preventDefault;
@@ -211,12 +270,11 @@ window.onload = () =>{
             const clientAddress = document.getElementById('client-address').value;
             const clientEmail = document.getElementById('client-email').value;
 
-            const auxAutor = newPerson(autorName, autorCel, autorEmail, autorAddress);
-            localStorage.setItem('infoAutor', JSON.stringify(auxAutor));
-            const auxClient = newPerson(clientName, clientCel, clientEmail, clientAddress);
-            localStorage.setItem('infoClient', JSON.stringify(auxClient));
+            autor = newPerson(autorName, autorCel, autorEmail, autorAddress);
+            client = newPerson(clientName, clientCel, clientEmail, clientAddress);
+
             tab.children[1].classList.remove('disabled');
-            instanceTab2.select('tab-2');
+            instanceTab.select('tab-2');
             M.toast({html: `Se han guardado tus datos y los del cliente`});
         }
     });
@@ -238,6 +296,8 @@ window.onload = () =>{
             const quantity = document.getElementById('quantity').value;
             addItemQuotation(name, type, price, discount, percent, quantity);
             M.toast({html: `Se ha insertado correctamente el ${type} ${name} en la cotización`}); 
+            formQuotation.reset();
+            elementsTemplate();
         }
     });
 
@@ -249,8 +309,24 @@ window.onload = () =>{
 
     btnContinueTab2.addEventListener('click', (e) => {
         e.preventDefault;
+        if(quotationItems.length != 0){
+            tab.children[2].classList.remove('disabled');
+            instanceTab.select('tab-3');
+            const date = new Date();
+            quotation = newQuotation(date, autor, client, quotationItems);
+            M.toast({html: `Se han guardado todos los datos de la cotización`}); 
+            console.log(quotation);
+        }else{
+            M.toast({html: `Debe ingresar al menos 1 producto o servicio`}); 
+            btnAddItem.focus();
+        }
 
     });
+
+    btnPdf.addEventListener('click', (e) => {
+        e.preventDefault;
+        createPDF();
+    })
 
 
 }

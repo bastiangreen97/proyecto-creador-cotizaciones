@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
     <div class="navbar-fixed">
@@ -28,7 +27,6 @@
         <li><a href="items.html"><i class="material-icons left">widgets</i>Gestión de servicios y productos</a></li>
     </ul>
 
-    <div class="container">
         <div class="row">
             <div class="col s12">
                 <ul id="tabs-quotation" class="tabs">
@@ -38,7 +36,6 @@
                 </ul>
             </div>
         </div>
-    </div>
     
     <div id="tab-1" class="container">
         <form id="form-autor-client">
@@ -89,7 +86,9 @@
                 </div>
             </div>
         </form>
-        <button type="submit" id="btn-tab-1">Guardar y continuar</button>
+        <div class="row">
+            <button type="submit" id="btn-tab-1" class="btn-large waves-effect waves-light indigo accent-3 z-depth-3 width-100"><i class="material-icons left">beenhere</i>Guardar y continuar</button>
+        </div>
     </div>
 
     <div id="tab-2" class="container">
@@ -125,11 +124,11 @@
                             <option value="1">Si</option>
                         </select>
                         <div class="input-field">
-                            <input type="number" name="percent" id="percent" value="0">
+                            <input type="number" name="percent" id="percent">
                             <label for="percent">% De descuento (Omita este campo si no aplica descuento)</label>
                         </div>
                         <div class="input-field">
-                            <input type="number" name="quantity" id="quantity" min="1" max="999" value="1">
+                            <input type="number" name="quantity" id="quantity" min="1" max="999">
                             <label for="quantity">Cantidad del producto/servicio (obligatorio)</label>
                         </div>
                     </div>
@@ -140,23 +139,23 @@
                 <button type="submit" id="btn-cancelitem" class="btn waves-effect waves-light orange">Cancelar</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col s6">
+        <div class="row valign-wrapper">
+            <div class="col s12 m6">
                 <h4>Detalle cotización</h4>
             </div>
-            <div class="col s6">
-                <button type="submit" id="btn-additem">Agregar producto o servicio</button>
+            <div class="col s12 m6">
+                <button type="submit" id="btn-additem"  class="btn waves-effect waves-light green accent-4 z-depth-3 width-100"><i class="material-icons left">add</i>>Agregar producto o servicio</button>
             </div>
         </div>
         <div class="row">
             <div class="col s12">
-                <table class="responsive">
+                <table class="responsive-table">
                     <thead>
                         <th>Producto</th>
                         <th>Tipo</th>
                         <th>Precio unitario</th>
                         <th>Descuento</th>
-                        <th>%</th>
+                        <th>Precio u. con descuento</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
                     </thead>
@@ -165,14 +164,32 @@
                     </tbody>
                 </table>
             </div>
-            <button type="submit" id="btn-tab-2">Guardar y continuar</button>
+        </div>
+        <div class="row">
+            <div class="col s12 m4 push-m8">
+                <div class="card yellow darken-3 z-depth-3">
+                    <div  id="card-total" class="card-content white-text center">
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s12 m8 pull-m4">
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">Añadir comentario, detalles y/o especificaciones (Opcional)</label>
+              </div>
+        </div>
+        <div class="row">
+            <button type="submit" id="btn-tab-2" class="btn-large waves-effect waves-light indigo accent-3 z-depth-3 width-100"><i class="material-icons left">beenhere</i>Guardar y continuar</button>
         </div>
     </div>
 
-    <div id="tab-3" class="container">Test 3</div>
-
+    <div id="tab-3" class="container">
+        <div>
+            <button type="submit" id="btn-pdf">Generar pdf</button>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
     <script src="js/appCotizaciones.js"></script>
 </body>
 </html>

@@ -59,7 +59,7 @@ thead{
 }
 
 td{
-    padding: 13px;
+    padding: 14px;
 }
 
 .icon-card{
@@ -73,3 +73,4 @@ td{
 
 /*Evita que los items y columnas en una fila se compriman de forma horizontal a medida que baja el tamaño de la pantalla, pasandolos a col s12*/
 @media only screen and (max-width: 600px) { .row.valign-wrapper { display: inherit; }}
+
