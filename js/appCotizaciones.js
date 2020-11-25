@@ -242,11 +242,7 @@ const createPDF = () => {
     let date = '';
     date = quotation.date.getDate().toString() + '-' + quotation.date.getMonth().toString() + '-' + quotation.date.getFullYear().toString();
     docName = clientName + ' ' + date;
-
     var doc = new jsPDF();
-
-    let templateHTML = '';
-    templateHTML += '<div width="50%"></div>'
     doc.save(docName+'.pdf');
 }
 
