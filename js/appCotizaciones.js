@@ -1,4 +1,6 @@
 
+
+
 window.jsPDF = window.jspdf.jsPDF;
 
 //Llama y guarda el array junto a sus objetos almacenados desde el localstorage
@@ -249,10 +251,11 @@ const createPDF = () => {
     docName = clientName + ' ' + date;
     let valuesBody = quotationItems.map((element) => Object.values(element));
     let doc = new jsPDF();
-    doc.getFontList();
+    doc.setFont('Lato-Regular', 'normal');
+    doc.setFont('PTSansNarrow-Regular', 'normal');
     doc.autoTable({
         theme: 'plain',
-        styles: { font: 'MotionPicture', fontStyle: 'normal', halign: 'center' },
+        styles: { font: 'Lato-Regular', fontStyle: 'normal', halign: 'center', cellPadding: Padding = 1 },
         head: [['Datos emisor', 'Datos cliente']],
         body: [[`${quotation.autor.name}`, `${quotation.client.name}`],
                [`${quotation.autor.cel}`, `${quotation.client.cel}`],
@@ -260,15 +263,12 @@ const createPDF = () => {
                [`${quotation.autor.address}`, `${quotation.client.address}`]]
     });
     doc.autoTable({
+        styles: {font: 'PTSansNarrow-Regular', fontStyle: 'normal', cellPadding: Padding = 3, lineColor: 0, lineWidth: 0.5},
+        columnStyles: {0: {fillColor: [212, 231, 236]}},
         showFoot: 'lastPage',
-        head: [['Nombre', 'Tipo', 'Precio', '% Descuento', 'P. con descuento', 'Cantidad', 'Subtotal']],
+        head: [['Nombre', 'Tipo', 'Precio', '% Descuento', 'Precio con desc.', 'Cantidad', 'Subtotal']],
         body: valuesBody,
         foot: [[' ', ' ', ' ', ' ', ' ', 'Total: ', `${auxTotal}`]]
-    });
-
-    doc.autoTable({
-        html: "#tbl-quotation",
-        useCss: true
     });
 
     doc.save(docName+'.pdf');
