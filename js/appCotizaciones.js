@@ -1,5 +1,6 @@
 
 window.jsPDF = window.jspdf.jsPDF;
+
 //Llama y guarda el array junto a sus objetos almacenados desde el localstorage
 let items2 = JSON.parse(localStorage.getItem('arrayItems')) || [];
 let autor = {};
@@ -21,6 +22,7 @@ const btnContinueTab2 = document.getElementById('btn-tab-2');
 const btnPdf = document.getElementById('btn-pdf');
 const quotationItems = [];
 let quotation = {};
+let auxTotal = 0;
 //Obtiene el elemento autocomplete
 const autoCompleteInput = document.getElementById('autocomplete-input');
 
@@ -68,12 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 //Crea un objeto para almacenar todos los datos de la cotización
-const newQuotation = (date, autor, client, listItems) => {
+const newQuotation = (date, autor, client, listItems, note, total) => {
     const quotation = {
         date: date,
         autor: autor,
         client: client,
-        listItems: listItems
+        listItems: listItems,
+        note: note,
+        total: total
     }
     return quotation;
 }
@@ -147,10 +151,11 @@ const tableTemplate = () => {
 const totalTemplate = () => {
     totalQuotation.innerHTML = '';
     let total = 0;
+    auxTotal = 0;
     quotationItems.forEach(element => {
         total = element.subTotal + total;
     });
-
+    auxTotal = total;
     return totalQuotation.innerHTML = `
         <p>Total: $${total}</p>
     `;
@@ -242,7 +247,30 @@ const createPDF = () => {
     let date = '';
     date = quotation.date.getDate().toString() + '-' + quotation.date.getMonth().toString() + '-' + quotation.date.getFullYear().toString();
     docName = clientName + ' ' + date;
-    var doc = new jsPDF();
+    let valuesBody = quotationItems.map((element) => Object.values(element));
+    let doc = new jsPDF();
+    doc.getFontList();
+    doc.autoTable({
+        theme: 'plain',
+        styles: { font: 'MotionPicture', fontStyle: 'normal', halign: 'center' },
+        head: [['Datos emisor', 'Datos cliente']],
+        body: [[`${quotation.autor.name}`, `${quotation.client.name}`],
+               [`${quotation.autor.cel}`, `${quotation.client.cel}`],
+               [`${quotation.autor.email}`, `${quotation.client.email}`],
+               [`${quotation.autor.address}`, `${quotation.client.address}`]]
+    });
+    doc.autoTable({
+        showFoot: 'lastPage',
+        head: [['Nombre', 'Tipo', 'Precio', '% Descuento', 'P. con descuento', 'Cantidad', 'Subtotal']],
+        body: valuesBody,
+        foot: [[' ', ' ', ' ', ' ', ' ', 'Total: ', `${auxTotal}`]]
+    });
+
+    doc.autoTable({
+        html: "#tbl-quotation",
+        useCss: true
+    });
+
     doc.save(docName+'.pdf');
 }
 
@@ -309,7 +337,8 @@ window.onload = () =>{
             tab.children[2].classList.remove('disabled');
             instanceTab.select('tab-3');
             const date = new Date();
-            quotation = newQuotation(date, autor, client, quotationItems);
+            const note = document.getElementById('textarea1').value;
+            quotation = newQuotation(date, autor, client, quotationItems, note, auxTotal);
             M.toast({html: `Se han guardado todos los datos de la cotización`}); 
             console.log(quotation);
         }else{
