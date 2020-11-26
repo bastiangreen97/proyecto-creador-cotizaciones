@@ -95,8 +95,8 @@ const indicatorTemplate = () => {
     let countProducts = 0;
     let countAll = 0;
 
-    countServices = items.filter(element => element.type === 'servicio').length;
-    countProducts = items.filter(element => element.type === 'producto').length;
+    countServices = items.filter(element => element.type === 'Servicio').length;
+    countProducts = items.filter(element => element.type === 'Producto').length;
     countAll = items.length;
 
     indicatorServices.innerHTML = `
@@ -179,7 +179,7 @@ window.onload = () => {
         const validator = formValidator();
 
         if(validator){
-            newItem(name,type,price);
+            newItem(name.trim(),type,price);
             M.toast({html: `El ${type} con nombre: ${name} fue registrado correctamente`});
             elementsTemplate();
             formNewItem.reset();

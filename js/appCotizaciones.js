@@ -28,6 +28,9 @@ let auxTotal = 0;
 //Obtiene el elemento autocomplete
 const autoCompleteInput = document.getElementById('autocomplete-input');
 
+const formPdf = document.getElementById('form-generatepdf');
+const logotypeFile = document.getElementById('logotype');
+
 //Retorna verdadero si ya se encuentra un item registrado con el mismo nombre
 const findItemQuotation = (name) => {
     let find = false;
@@ -168,11 +171,7 @@ const formAutorClientValidator = () =>{
     const autorName = document.getElementById('autor-name').value;
     const autorCel = document.getElementById('autor-cel').value;
     const autorEmail = document.getElementById('autor-email').value;
-    const autorAddress = document.getElementById('autor-address').value;
     const clientName = document.getElementById('client-name').value;
-    const clientCel = document.getElementById('client-cel').value;
-    const clientAddress = document.getElementById('client-address').value;
-    const clientEmail = document.getElementById('client-email').value;
 
     const expRegCel = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
 
@@ -194,18 +193,6 @@ const formAutorClientValidator = () =>{
         return false;
     }else if(clientName == '' || clientName.length == 0){
         M.toast({html: `Debe ingresar el nombre del cliente`});
-        document.getElementById('client-name').focus();
-        return false;
-    }else if(clientCel == 0 || clientCel.length == 0){
-        M.toast({html: `Debe ingresar el número de celular del cliente`});
-        document.getElementById('client-cel').focus();
-        return false;
-    }else if(expRegCel.test(clientCel) != true){
-        M.toast({html: `Debe ingresar un número de celular válido`});
-        document.getElementById('client-cel').focus();
-        return false;
-    }else if(clientEmail == '' || clientEmail.length == 0){
-        M.toast({html: `Debe ingresar el email del cliente`});
         document.getElementById('client-name').focus();
         return false;
     }else{
@@ -253,27 +240,87 @@ const createPDF = () => {
     let doc = new jsPDF();
     doc.setFont('Lato-Regular', 'normal');
     doc.setFont('PTSansNarrow-Regular', 'normal');
+
+    let imgData = localStorage.getItem("logotype");
+    let extensionImg = localStorage.getItem("extension");
+
+    if(imgData == null){
+        const auxImg = new Image();
+        auxImg.src = '../img/sinlogo.png';
+        imgData = auxImg;
+        extensionImg = 'PNG';
+    }
+
+    doc.addImage(imgData, extensionImg, 15, 10, 25, 25);
+    doc.text(50, 15, `${quotation.autor.name}`);
+    doc.text(50, 20, `${quotation.autor.cel}`);
+    doc.text(50, 25, `${quotation.autor.email}`);
+    doc.text(50, 30, `${quotation.autor.address}`);
+
+    doc.setDrawColor(212, 231, 236);
+    doc.setLineWidth(15); 
+    doc.line(0, 50, 560, 50);
     doc.autoTable({
         theme: 'plain',
-        styles: { font: 'Lato-Regular', fontStyle: 'normal', halign: 'center', cellPadding: Padding = 1 },
-        head: [['Datos emisor', 'Datos cliente']],
-        body: [[`${quotation.autor.name}`, `${quotation.client.name}`],
-               [`${quotation.autor.cel}`, `${quotation.client.cel}`],
-               [`${quotation.autor.email}`, `${quotation.client.email}`],
-               [`${quotation.autor.address}`, `${quotation.client.address}`]]
+        startY: 45,
+        bodyStyles: {textColor: [255,255,255], halign: 'center', fontSize: 20},
+        body: [['C O T I Z A C I O N']]
+    });
+
+    doc.setDrawColor(212, 200, 190);
+    doc.setLineWidth(8); 
+    doc.line(140, 35, 560, 35);
+    doc.text(160, 40, `Fecha: ${date}`);
+
+    doc.autoTable({
+        theme: 'plain',
+        bodyStyles: { font: 'Lato-Regular', fontStyle: 'normal', cellPadding: Padding = 2 },
+        head: [['Datos cliente',' ']],
+        body: [[`Nombre: ${quotation.client.name}`,`Email: ${quotation.client.email}`],
+               [`Celular/telefono: ${quotation.client.cel}`,`Dirección: ${quotation.client.address}`]]
     });
     doc.autoTable({
-        styles: {font: 'PTSansNarrow-Regular', fontStyle: 'normal', cellPadding: Padding = 3, lineColor: 0, lineWidth: 0.5},
+        theme: 'plain',
+        bodyStyles: { font: 'Lato-Regular', fontStyle: 'normal'},
+        head: [['Detalle items cotización']],
+        body: [[`Estimad@ ${quotation.client.name}, a continuación se detallan los productos y/o servicios solicitados`]]
+    });
+    doc.autoTable({
+        styles: {font: 'PTSansNarrow-Regular', fontStyle: 'normal', cellPadding: Padding = 3},
+        headStyles: {fontSize: 12},
+        footStyles: {fontSize: 12},
         columnStyles: {0: {fillColor: [212, 231, 236]}},
         showFoot: 'lastPage',
         head: [['Nombre', 'Tipo', 'Precio', '% Descuento', 'Precio con desc.', 'Cantidad', 'Subtotal']],
         body: valuesBody,
         foot: [[' ', ' ', ' ', ' ', ' ', 'Total: ', `${auxTotal}`]]
     });
-
+    doc.autoTable({
+        theme: 'plain',
+        bodyStyles: {font: 'Lato-Regular', fontStyle: 'normal'},
+        head:[[` Comentarios, detalles y/o especificaciones`]],
+        body: [[`    ${quotation.note}`]]
+    });
     doc.save(docName+'.pdf');
 }
 
+const showLogotype = () => {
+    const srcImage = localStorage.getItem("logotype");
+    const imgHtml = document.getElementById('logotypePreview');
+    if(srcImage){
+        imgHtml.setAttribute("src", srcImage);
+    }
+}
+
+const fileValidation = () => {
+    const filePath = logotypeFile.value;
+    const allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        return false;
+    }else{
+        return true;
+    }
+}
 
 window.onload = () =>{
     const instanceAuto = M.Autocomplete.getInstance(autoCompleteInput);
@@ -348,10 +395,30 @@ window.onload = () =>{
 
     });
 
+    logotypeFile.addEventListener('change', function() {
+        if(fileValidation()){
+            
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                window.localStorage.setItem("logotype", reader.result);
+                const type = logotypeFile.files[0].type.split("/").pop();
+                localStorage.setItem("extension", type);
+                console.log(reader.result);
+                showLogotype();
+            });
+            reader.readAsDataURL(logotypeFile.files[0]);
+        }else{
+            M.toast({html: `Solo se pueden cargar imagenes de tipo .JPG, .JPEG y .PNG`});
+            logotypeFile.value = '';
+            logotypeFile.focus();
+        }
+    });
+
     btnPdf.addEventListener('click', (e) => {
         e.preventDefault;
         createPDF();
     })
 
-
+    showLogotype();
 }
