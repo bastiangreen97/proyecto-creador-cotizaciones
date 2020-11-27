@@ -311,8 +311,8 @@ const createPDF = () => {
         head:[[` Comentarios, detalles y/o especificaciones`]],
         body: [[`    ${quotation.note}`]]
     });
-    doc.save(docName+'.pdf');
     M.toast({html: `Se ha descargado la cotización en formato PDF`});
+    doc.save(docName+'.pdf');
 }
 
 const showLogotype = () => {
