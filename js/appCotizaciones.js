@@ -1,6 +1,3 @@
-
-
-
 window.jsPDF = window.jspdf.jsPDF;
 
 //Llama y guarda el array junto a sus objetos almacenados desde el localstorage
@@ -118,7 +115,7 @@ const addItemQuotation = (name, type, price, discount, percent, quantity) =>{
     let subTotal = 0;
 
     if(discount == '1'){
-        priceWithDiscount = Math.round(price - (percent/100) * price)
+        priceWithDiscount = Math.round(price - (percent/100) * price);
         subTotal = priceWithDiscount * quantity;
     }
     else{
@@ -146,7 +143,6 @@ const elementsTemplate = () => {
 
 const tableTemplate = () => {
     quotationTable.innerHTML = '';
-    //TODO: Aplicar correción a los botones
     quotationItems.forEach(element => {
         quotationTable.innerHTML += `
             <tr>
@@ -176,7 +172,7 @@ const totalTemplate = () => {
     `;
 }
 
-//Validar que todos los campos de autor y cliente se encuentren con datos
+//Validar que los campos de autor y cliente se encuentren con datos
 const formAutorClientValidator = () =>{
     const autorName = document.getElementById('autor-name').value;
     const autorCel = document.getElementById('autor-cel').value;
@@ -316,6 +312,7 @@ const createPDF = () => {
         body: [[`    ${quotation.note}`]]
     });
     doc.save(docName+'.pdf');
+    M.toast({html: `Se ha descargado la cotización en formato PDF`});
 }
 
 const showLogotype = () => {
@@ -344,7 +341,7 @@ window.onload = () =>{
     elementsTemplate();
 
     btnContinueTab1.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         if(formAutorClientValidator()){
             const autorName = document.getElementById('autor-name').value;
             const autorCel = document.getElementById('autor-cel').value;
@@ -365,7 +362,7 @@ window.onload = () =>{
     });
 
     btnAddItem.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         formQuotation.reset();
         instanceModal.open();
     });
@@ -387,7 +384,7 @@ window.onload = () =>{
     });
 
     btnCancelItem.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         formQuotation.reset();
         instanceModal.close();
     });
@@ -398,12 +395,11 @@ window.onload = () =>{
             deleteItemQuotation(e.target.value);
             M.toast({html: `El item: ${e.target.value} fue eliminado de la cotización`, classes:'black'});
             elementsTemplate();            
-            
         }
-    })
+    });
 
     btnContinueTab2.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         if(quotationItems.length != 0){
             tab.children[2].classList.remove('disabled');
             instanceTab.select('tab-3');
@@ -420,10 +416,8 @@ window.onload = () =>{
     });
 
     logotypeFile.addEventListener('change', function() {
-        if(fileValidation()){
-            
+        if(fileValidation()){       
             const reader = new FileReader();
-
             reader.addEventListener('load', () => {
                 window.localStorage.setItem("logotype", reader.result);
                 const type = logotypeFile.files[0].type.split("/").pop();
@@ -440,9 +434,9 @@ window.onload = () =>{
     });
 
     btnPdf.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         createPDF();
-    })
+    });
 
     btnDeleteLogo.addEventListener('click', (e) =>{
         e.preventDefault();
@@ -452,6 +446,5 @@ window.onload = () =>{
         textInputFile[0].value = '';
         const imgHtml = document.getElementById('logotypePreview');
         imgHtml.setAttribute("src", "");
-    })
-
+    });
 }

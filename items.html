@@ -21,12 +21,10 @@
             </div>
         </nav>
     </div>
-
     <ul class="sidenav" id="menu-right">
         <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
         <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
     </ul>
-
     <div class="width-100 back-purple-gradient">
         <div class="container">
             <div class="row valign-wrapper">
@@ -59,7 +57,6 @@
                     </div>
                 </div>
                 <div class="col s12 m5 pull-m7">
-                    <!--<img class="responsive-img" src="img/portadagestion.svg">-->
                     <img class="responsive-img" src="img/imagengestion.svg">
                 </div>
             </div>
@@ -70,13 +67,13 @@
                 <!-- Modal/popup para registro y modificar item-->
                 <div id="modal-items" class="modal">
                     <div class="modal-content">
-                      <h4 id="title-mdl" class="center"></h4>
-                      <div class="row">
-                        <div class="col s12 m5">
-                            <img class="responsive-img" src="img/imagenmodal.svg">
-                        </div>
-                        <div class="col s12 m7">
-                            <form id="form-newitem">
+                            <h4 id="title-mdl" class="center"></h4>
+                            <div class="row">
+                            <div class="col s12 m5">
+                                <img class="responsive-img" src="img/imagenmodal.svg">
+                            </div>
+                            <div class="col s12 m7">
+                                <form id="form-newitem">
                                     <label for="name">Nombre producto/servicio (obligatorio)</label>
                                     <input type="text" name="name" id="name" maxlength="30" placeholder=" ">
                                     <label for="slc-type">Tipo</label>
@@ -88,9 +85,9 @@
                                     <label></label>
                                     <label for="price">Precio</label>
                                     <input type="number" name="price" id="price" placeholder=" ">    
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                      </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btn-newitem" class="btn waves-effect waves-light green accent-4">Ingresar</button>
@@ -113,7 +110,6 @@
                         <th>Editar</th>
                     </thead>
                     <tbody id="tbl-content">
-                        
                     </tbody>
                 </table>
             </div>

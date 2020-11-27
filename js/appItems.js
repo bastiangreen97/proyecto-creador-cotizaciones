@@ -71,7 +71,6 @@ const elementsTemplate = () => {
 //Diseño y elementos de la tabla
 const tableTemplate = () => {
     table.innerHTML = '';
-    //TODO: Aplicar correción a los botones
     items.forEach(element => {
         table.innerHTML += `
             <tr>
@@ -168,7 +167,7 @@ window.onload = () => {
         e.preventDefault();
         instanceModal.close();
         formNewItem.reset();
-    })
+    });
 
     btnNewItem.addEventListener('click', (e) => {
         //e.preventDefault previene que la página se refresque
@@ -204,8 +203,7 @@ window.onload = () => {
             formNewItem.reset();
             instanceModal.close();
         }
-
-    })
+    });
 
     table.addEventListener('click', (e) =>{
         
@@ -230,7 +228,7 @@ window.onload = () => {
                 btnEditItem.style.display = "";
             }
         }
-    })
+    });
 }
 
 
