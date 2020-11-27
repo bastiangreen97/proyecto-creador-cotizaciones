@@ -208,8 +208,7 @@ window.onload = () => {
     })
 
     table.addEventListener('click', (e) =>{
-
-        //TODO: Aplicar correción a los botones y values
+        
         e.preventDefault();
         if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
             if(e.target.innerHTML === 'Eliminar'){

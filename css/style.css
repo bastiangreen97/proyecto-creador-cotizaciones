@@ -3,11 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
 
-body{
-    background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
-    
-}
-
 nav{
     background-color: black;
 }
@@ -17,13 +12,23 @@ nav{
 }
 
 .back-purple-gradient{
-    background: rgb(21,19,25);
-    background: linear-gradient(259deg, rgba(21,19,25,1) 0%, rgba(152,128,208,1) 76%);
+    /*background: rgb(21,19,25);
+    background: linear-gradient(259deg, rgba(21,19,25,1) 0%, rgba(152,128,208,1) 76%);*/
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 7%, rgba(4,119,193,1) 52%, rgba(58,58,181,1) 80%, rgba(37,35,125,1) 100%);
 }
 
-.back-yellow-gradient{
-    background: rgb(255,140,73);
-    background: linear-gradient(259deg, rgba(255,140,73,1) 0%, rgba(255,226,120,1) 76%);
+.tabs{
+    background-color: transparent;
+    color: white;
+}
+
+.tabs li a{
+    color: white !important; 
+}
+
+.tabs .indicator {
+    background-color:#000;
 }
 
 .without-shadow{
@@ -53,7 +58,7 @@ table{
 
 thead{
     border: none;
-    background-color: #A699AB;
+    background: #1e88e5;
     color: white;
     font-family: 'Roboto', sans-serif;
 }
@@ -69,6 +74,11 @@ td{
 
 .width-100{
     width: 100% !important;
+}
+
+.logotype{
+    max-width: 200px;
+    max-height: 200px;
 }
 
 /*Evita que los items y columnas en una fila se compriman de forma horizontal a medida que baja el tamaño de la pantalla, pasandolos a col s12*/

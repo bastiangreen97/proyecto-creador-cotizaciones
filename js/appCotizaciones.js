@@ -30,6 +30,7 @@ const autoCompleteInput = document.getElementById('autocomplete-input');
 
 const formPdf = document.getElementById('form-generatepdf');
 const logotypeFile = document.getElementById('logotype');
+const btnDeleteLogo = document.getElementById('btn-deletelogotype');
 
 //Retorna verdadero si ya se encuentra un item registrado con el mismo nombre
 const findItemQuotation = (name) => {
@@ -65,6 +66,8 @@ const showItem = (name) => {
 
 //Inicia los componentes de materialize
 document.addEventListener('DOMContentLoaded', function() {
+    const elemsNav = document.querySelectorAll('.sidenav');
+    const instancesNav = M.Sidenav.init(elemsNav);
     const elemsAuto = document.querySelectorAll('.autocomplete');
     const instancesAuto = M.Autocomplete.init(elemsAuto);
     const elemsSlc = document.querySelectorAll('select');
@@ -101,6 +104,12 @@ const newPerson = (name, cel, email, address) => {
 const getItem = (name) => {
     const item = items2.find(element => element.name === name);
     return item;
+}
+
+const deleteItemQuotation = (name) => {
+    let index = null;
+    index = quotationItems.findIndex((element) => element.name === name);
+    quotationItems.splice(index, 1);
 }
 
 //Inserta un item a la cotización
@@ -148,6 +157,7 @@ const tableTemplate = () => {
                 <td>${element.priceDiscount}</td>
                 <td>${element.quantity}</td>
                 <td>${element.subTotal}</td>
+                <td><button class="btn-small red" value="${element.name}">Eliminar</button></td>
             </tr>
         `;
     });
@@ -244,7 +254,7 @@ const createPDF = () => {
     let imgData = localStorage.getItem("logotype");
     let extensionImg = localStorage.getItem("extension");
 
-    if(imgData == null){
+    if(imgData === null || imgData === "0"){
         const auxImg = new Image();
         auxImg.src = '../img/sinlogo.png';
         imgData = auxImg;
@@ -252,9 +262,13 @@ const createPDF = () => {
     }
 
     doc.addImage(imgData, extensionImg, 15, 10, 25, 25);
+    doc.setFont('PTSansNarrow-Regular', 'normal');
     doc.text(50, 15, `${quotation.autor.name}`);
+    doc.setFontSize(12);
     doc.text(50, 20, `${quotation.autor.cel}`);
+    doc.setFontSize(12);
     doc.text(50, 25, `${quotation.autor.email}`);
+    doc.setFontSize(12);
     doc.text(50, 30, `${quotation.autor.address}`);
 
     doc.setDrawColor(212, 231, 236);
@@ -270,18 +284,18 @@ const createPDF = () => {
     doc.setDrawColor(212, 200, 190);
     doc.setLineWidth(8); 
     doc.line(140, 35, 560, 35);
-    doc.text(160, 40, `Fecha: ${date}`);
+    doc.text(160, 38, `Fecha: ${date}`);
 
     doc.autoTable({
         theme: 'plain',
-        bodyStyles: { font: 'Lato-Regular', fontStyle: 'normal', cellPadding: Padding = 2 },
+        bodyStyles: { font: 'Lato-Regular', fontStyle: 'normal', fontSize: 12, cellPadding: Padding = 1 },
         head: [['Datos cliente',' ']],
         body: [[`Nombre: ${quotation.client.name}`,`Email: ${quotation.client.email}`],
                [`Celular/telefono: ${quotation.client.cel}`,`Dirección: ${quotation.client.address}`]]
     });
     doc.autoTable({
         theme: 'plain',
-        bodyStyles: { font: 'Lato-Regular', fontStyle: 'normal'},
+        bodyStyles: { font: 'Lato-Regular', fontStyle: 'normal', fontSize: 12},
         head: [['Detalle items cotización']],
         body: [[`Estimad@ ${quotation.client.name}, a continuación se detallan los productos y/o servicios solicitados`]]
     });
@@ -297,7 +311,7 @@ const createPDF = () => {
     });
     doc.autoTable({
         theme: 'plain',
-        bodyStyles: {font: 'Lato-Regular', fontStyle: 'normal'},
+        bodyStyles: {font: 'Lato-Regular', fontStyle: 'normal', fontSize: 12},
         head:[[` Comentarios, detalles y/o especificaciones`]],
         body: [[`    ${quotation.note}`]]
     });
@@ -376,6 +390,16 @@ window.onload = () =>{
         e.preventDefault;
         formQuotation.reset();
         instanceModal.close();
+    });
+
+    quotationTable.addEventListener('click', (e) =>{
+        e.preventDefault();
+        if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
+            deleteItemQuotation(e.target.value);
+            M.toast({html: `El item: ${e.target.value} fue eliminado de la cotización`, classes:'black'});
+            elementsTemplate();            
+            
+        }
     })
 
     btnContinueTab2.addEventListener('click', (e) => {
@@ -420,5 +444,14 @@ window.onload = () =>{
         createPDF();
     })
 
-    showLogotype();
+    btnDeleteLogo.addEventListener('click', (e) =>{
+        e.preventDefault();
+        localStorage.setItem("logotype", "0");
+        logotypeFile.value = '';
+        const textInputFile = document.getElementsByClassName("file-path validate");
+        textInputFile[0].value = '';
+        const imgHtml = document.getElementById('logotypePreview');
+        imgHtml.setAttribute("src", "");
+    })
+
 }
