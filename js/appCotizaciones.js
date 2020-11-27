@@ -251,10 +251,11 @@ const createPDF = () => {
     let extensionImg = localStorage.getItem("extension");
 
     if(imgData === null || imgData === "0"){
-        const auxImg = new Image();
+        imgData = transformBase64('/img/sinlogo.png');
+        /*const auxImg = new Image();
         auxImg.src = "/img/sinlogo.png";
-        imgData = auxImg;
-        extensionImg = "PNG";
+        imgData = auxImg;*/
+        extensionImg = 'PNG';
     }
 
     doc.addImage(imgData, extensionImg, 15, 10, 25, 25);
@@ -314,6 +315,16 @@ const createPDF = () => {
     M.toast({html: `Se ha descargado la cotización en formato PDF`});
     doc.save(docName+'.pdf');
 }
+
+const transformBase64 = (imagePath) => {
+    var defer = this.q.defer();
+    var img = new Image();
+    img.src = imagePath;
+    img.addEventListener('load', function () {
+        defer.resolve(img);
+    });
+    return defer.promise;
+};
 
 const showLogotype = () => {
     const srcImage = localStorage.getItem("logotype");
