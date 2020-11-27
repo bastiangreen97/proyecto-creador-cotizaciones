@@ -1,10 +1,33 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
 
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
 nav{
     background-color: black;
+}
+
+.index-information{
+    text-align: justify;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}
+
+.index-information a{
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+}
+
+.index-information li{
+    margin-left: 30px;
+    font-size: 13px;
 }
 
 .container{
@@ -12,10 +35,8 @@ nav{
 }
 
 .back-purple-gradient{
-    /*background: rgb(21,19,25);
-    background: linear-gradient(259deg, rgba(21,19,25,1) 0%, rgba(152,128,208,1) 76%);*/
     background: rgb(0,212,255);
-    background: linear-gradient(90deg, rgba(0,212,255,1) 7%, rgba(4,119,193,1) 52%, rgba(58,58,181,1) 80%, rgba(37,35,125,1) 100%);
+background: linear-gradient(90deg, rgba(0,212,255,1) 7%, rgba(4,119,193,1) 40%, rgba(58,58,181,1) 63%, rgba(87,44,172,1) 71%, rgba(134,44,161,1) 95%);
 }
 
 .tabs{

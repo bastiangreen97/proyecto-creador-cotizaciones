@@ -7,6 +7,7 @@
     <title>Gestor de cotizaciones</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -38,12 +39,12 @@
     </div>
     <div id="tab-1" class="container">
         <form id="form-autor-client">
-            <div class="row">
+            <div class="row animate__animated animate__backInDown">
                 <h5>Datos del emisor</h5>
                 <div class="col s12 m6">
                     <div class="input-field">
                         <input type="text" name="autor-name" id="autor-name">
-                        <label for="autor-name">Nombre persona o empresa (obligatorio)</label>
+                        <label for="autor-name">Nombre persona o pyme (obligatorio)</label>
                     </div>
                     <div class="input-field">
                         <input type="number" name="autor-cel" id="autor-cel">
@@ -61,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row animate__animated animate__backInDown">
                 <h5>Datos del cliente</h5>
                 <div class="col s12 m6">
                     <div class="input-field">
@@ -85,7 +86,7 @@
                 </div>
             </div>
         </form>
-        <div class="row">
+        <div class="row animate__animated animate__backInDown">
             <button type="submit" id="btn-tab-1" class="btn-large waves-effect waves-light  cyan darken-2 z-depth-3 width-100"><i class="material-icons left">beenhere</i>Guardar y continuar</button>
         </div>
     </div>
@@ -128,7 +129,7 @@
                 <button type="submit" id="btn-cancelitem" class="btn waves-effect waves-light orange">Cancelar</button>
             </div>
         </div>
-        <div class="row valign-wrapper">
+        <div class="row valign-wrapper animate__animated animate__backInDown">
             <div class="col s12 m6">
                 <h4>Detalle cotización</h4>
             </div>
@@ -136,7 +137,7 @@
                 <button type="submit" id="btn-additem"  class="btn waves-effect waves-light green accent-4 z-depth-3 width-100"><i class="material-icons left">add</i>Agregar producto o servicio</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row animate__animated animate__backInDown">
             <div class="col s12">
                 <table id="tbl-quotation" class="responsive-table z-depth-3 striped centered">
                     <thead>
@@ -147,14 +148,14 @@
                         <th>Precio u. con descuento</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
-                        <th>Eliminar</th>
+                        <th>Quitar</th>
                     </thead>
                     <tbody id="quotation-table">
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="row">
+        <div class="row animate__animated animate__backInDown">
             <div class="col s12 m4 push-m8">
                 <div class="card yellow darken-3 z-depth-3">
                     <div  id="card-total" class="card-content white-text center">
@@ -166,14 +167,14 @@
                 <label for="textarea1">Añadir comentarios, detalles y/o especificaciones (Opcional)</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row animate__animated animate__backInDown">
             <button type="submit" id="btn-tab-2" class="btn-large waves-effect waves-light cyan darken-2 z-depth-3 width-100"><i class="material-icons left">beenhere</i>Guardar y continuar</button>
         </div>
     </div>
     <div id="tab-3" class="container">
-        <h4 class="center">Generar PDF</h4>
         <div class="row valign-wrapper">
-            <div class="col s12 m6">
+            <div class="col s12 m6 animate__animated animate__backInLeft">
+                <h4 class="center">Generar PDF</h4>
                 <p>Si tienes un logo personal o de tu pyme, puedes subirlo para que sea insertado en el PDF (Opcional)</p>
                 <div class="file-field input-field">
                     <div class="btn-small">
@@ -197,7 +198,7 @@
             <div class="col s12 m1">
 
             </div>
-            <div class="col s12 m5">
+            <div class="col s12 m5 animate__animated animate__backInRight">
                 <img src="img/imagencotizacion.svg" alt="" class="responsive-img">
             </div>
         </div>

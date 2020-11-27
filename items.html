@@ -7,6 +7,7 @@
     <title>Gestor de items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,23 +29,23 @@
     <div class="width-100 back-purple-gradient">
         <div class="container">
             <div class="row valign-wrapper">
-                <div class="col s12 m6 push-m5">
+                <div class="col s12 m6 push-m5 animate__animated animate__fadeInRight">
                     <h3 class="white-text">Gestión de servicios y productos</h3>
                     <div class="row">
                         <div class="col s12 m4">
-                            <div class="card yellow darken-3 z-depth-3">
+                            <div class="card pink accent-3 z-depth-3">
+                                <div  id="card-products" class="card-content white-text center">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4">
+                            <div class="card amber darken-1 z-depth-3">
                                 <div  id="card-services" class="card-content white-text center">
                                 </div>
                             </div>
                         </div>
                         <div class="col s12 m4">
                             <div class="card cyan z-depth-3">
-                                <div  id="card-products" class="card-content white-text center">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s12 m4">
-                            <div class="card pink accent-3 z-depth-3">
                                 <div  id="card-total" class="card-content white-text center">
                                 </div>
                             </div>
@@ -56,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s12 m5 pull-m7">
+                <div class="col s12 m5 pull-m7 animate__animated animate__fadeInLeft">
                     <img class="responsive-img" src="img/imagengestion.svg">
                 </div>
             </div>
@@ -75,7 +76,7 @@
                             <div class="col s12 m7">
                                 <form id="form-newitem">
                                     <label for="name">Nombre producto/servicio (obligatorio)</label>
-                                    <input type="text" name="name" id="name" maxlength="30" placeholder=" ">
+                                    <input type="text" name="name" id="name" maxlength="50" placeholder=" ">
                                     <label for="slc-type">Tipo</label>
                                     <select name="type" id="slc-type">
                                         <option value="0">Seleccione un tipo (obligatorio)</option>
@@ -98,9 +99,9 @@
             </div>
         </div>
     <div class="container">
-        <h3>Listado de items</h3>
         <div class="row">
-            <div class="col s12">
+            <div class="col s12 animate__animated animate__backInRight">
+                <h3>Listado de items</h3>
                 <table class="responsive-table z-depth-3 striped centered">
                     <thead>
                         <th>Nombre</th>

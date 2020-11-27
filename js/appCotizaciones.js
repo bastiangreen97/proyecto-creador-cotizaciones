@@ -153,7 +153,7 @@ const tableTemplate = () => {
                 <td>${element.priceDiscount}</td>
                 <td>${element.quantity}</td>
                 <td>${element.subTotal}</td>
-                <td><button class="btn-small red" value="${element.name}">Eliminar</button></td>
+                <td><button class="btn-small red" value="${element.name}">Quitar</button></td>
             </tr>
         `;
     });
@@ -391,9 +391,9 @@ window.onload = () =>{
 
     quotationTable.addEventListener('click', (e) =>{
         e.preventDefault();
-        if(e.target.innerHTML === 'Eliminar' || e.target.innerHTML === 'Editar'){
+        if(e.target.innerHTML === 'Quitar'){
             deleteItemQuotation(e.target.value);
-            M.toast({html: `El item: ${e.target.value} fue eliminado de la cotización`, classes:'black'});
+            M.toast({html: `El item: ${e.target.value} fue quitado de la cotización`, classes:'black'});
             elementsTemplate();            
         }
     });
@@ -412,7 +412,6 @@ window.onload = () =>{
             M.toast({html: `Debe ingresar al menos 1 producto o servicio`}); 
             btnAddItem.focus();
         }
-
     });
 
     logotypeFile.addEventListener('change', function() {

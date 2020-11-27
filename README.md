@@ -8,5 +8,6 @@ Para el desarrollo del proyecto estoy utilizando las siguientes tecnologias, fra
     - HTML
     - CSS3
     - Materialize CSS
+    - Animated CSS
     - jsPDF, AutoTable plugin.
 
