@@ -252,12 +252,12 @@ const createPDF = () => {
 
     if(imgData === null || imgData === "0"){
         const auxImg = new Image();
-        auxImg.src = '../img/sinlogo.png';
+        auxImg.src = "/img/sinlogo.png";
         imgData = auxImg;
         extensionImg = "PNG";
     }
 
-    doc.addImage(imgData, extensionImg.toString(), 15, 10, 25, 25);
+    doc.addImage(imgData, extensionImg, 15, 10, 25, 25);
     doc.setFont('PTSansNarrow-Regular', 'normal');
     doc.text(50, 15, `${quotation.autor.name}`);
     doc.setFontSize(12);
