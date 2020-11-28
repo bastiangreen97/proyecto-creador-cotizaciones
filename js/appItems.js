@@ -70,6 +70,7 @@ const elementsTemplate = () => {
 
 //Diseño y elementos de la tabla
 const tableTemplate = () => {
+    items = JSON.parse(localStorage.getItem('arrayItems'));
     table.innerHTML = '';
     items.forEach(element => {
         table.innerHTML += `
