@@ -219,7 +219,7 @@ const formItemValidator = () =>{
         document.getElementById('autocomplete-input').focus();
         return false;
     }else if(find){
-        M.toast({html: `Ya ha insertado el producto/servicio con nombre: ${name}`});
+        M.toast({html: `El producto o servicio con nombre: ${name} ya se encuentra agregado a la cotización`});
         document.getElementById('autocomplete-input').focus();
         return false;
     }else if((discount == '1' && percent == null) || (discount == '1' && percent == 0)){
@@ -227,7 +227,7 @@ const formItemValidator = () =>{
         document.getElementById('percent').focus();
         return false;
     }else if(quantity == 0){
-        M.toast({html: `Debe ingresar la cantidad del producto o servicio`});
+        M.toast({html: `Debe ingresar una cantidad`});
         document.getElementById('quantity').focus();
         return false;
     }
@@ -381,7 +381,7 @@ window.onload = () =>{
             const percent = document.getElementById('percent').value;
             const quantity = document.getElementById('quantity').value;
             addItemQuotation(name, type, price, discount, percent, quantity);
-            M.toast({html: `Se ha insertado correctamente el ${type} ${name} en la cotización`}); 
+            M.toast({html: `Se agregó el ${type} ${name} en la cotización`}); 
             formQuotation.reset();
             elementsTemplate();
         }
