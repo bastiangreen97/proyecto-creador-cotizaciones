@@ -1,5 +1,5 @@
-window.jsPDF = window.jspdf.jsPDF;
 
+window.jsPDF = window.jspdf.jsPDF;
 //Llama y guarda el array junto a sus objetos almacenados desde el localstorage
 let items2 = JSON.parse(localStorage.getItem('arrayItems')) || [];
 let autor = {};
@@ -249,13 +249,17 @@ const createPDF = () => {
 
     let imgData = localStorage.getItem("logotype");
     let extensionImg = localStorage.getItem("extension");
-
     if(imgData === null || imgData === "0"){
-        const auxImg = new Image();
-        auxImg.src = '/img/sinlogo.png';
+        /*const auxImg = new Image();
+        auxImg.src = 'img/sinlogo.png';
         imgData = auxImg;
+        console.log(imgData); */
+        const imgBase64 = "data:image/png;base64,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";
+        imgData = imgBase64;
         extensionImg = 'PNG';
     }
+
+    console.log(imgData);
 
     doc.addImage(imgData, extensionImg, 15, 10, 25, 25);
     doc.setFont('PTSansNarrow-Regular', 'normal');
