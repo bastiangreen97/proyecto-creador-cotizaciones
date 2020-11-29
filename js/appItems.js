@@ -139,12 +139,13 @@ const formValidator = () => {
 
 //Inicia los componentes de materialize
 document.addEventListener('DOMContentLoaded', function() {
+    const elemsNav = document.querySelectorAll('.sidenav');
+    const instancesNav = M.Sidenav.init(elemsNav);
     const elemsMdl = document.querySelectorAll('.modal');
     const instancesMdl = M.Modal.init(elemsMdl);
     const elemsSlc = document.querySelectorAll('select');
     const instancesSlc = M.FormSelect.init(elemsSlc);
-    const elemsNav = document.querySelectorAll('.sidenav');
-    const instancesNav = M.Sidenav.init(elemsNav);
+    
 });
 
 //Carga de contenido DOM, funciones
