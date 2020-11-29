@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap');
@@ -46,6 +46,9 @@ nav a:hover {
     background: linear-gradient(90deg, rgba(81,179,255,1) 0%, rgba(55,96,198,1) 50%, rgba(142,76,168,1) 100%);
 }
 
+label{
+    font-size: 14px;
+}
 .tabs{
     background-color: transparent;
     color: white;
@@ -77,21 +80,28 @@ div.card{
     font-size: 16px;
 }
 
-table{
-    font-family: 'PT Sans Narrow', sans-serif;
-    background-color: white;
-    color: #727272;
-}
-
 thead{
     border: none;
-    background: #1e88e5;
-    color: white;
     font-family: 'Roboto', sans-serif;
 }
 
+tbody{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    color: #727272;
+}
+
 td{
-    padding: 14px;
+    padding: 12px;
+}
+
+table.striped > tbody > tr:nth-child(odd) {
+    background-color: rgba(170, 213, 213, 0.5);   
+}
+
+table.highlight>tbody>tr:hover {
+    background-color: rgba(194, 206, 23, 0.5);
 }
 
 .width-100{
@@ -103,6 +113,12 @@ td{
     max-height: 200px;
 }
 
-/*Evita que los items y columnas en una fila se compriman de forma horizontal a medida que baja el tamaño de la pantalla, pasandolos a col s12*/
-@media only screen and (max-width: 600px) { .row.valign-wrapper { display: inherit; }}
+/*Evita que los items y columnas en una fila se compriman de forma horizontal a medida que baja el tamaño de la pantalla, pasandolos a col s12*, también cambia el background gradient a 2 colores*/
+@media only screen and (max-width: 600px) { 
+    .row.valign-wrapper { display: inherit; }
+    .back-purple-gradient{
+        background: rgb(70,153,217);
+        background: linear-gradient(90deg, rgba(55,96,198,1) 0%, rgba(142,76,168,1) 100%);
+        
+    } }
 
