@@ -2,9 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap');
 
 body{
     font-family: 'Roboto', sans-serif;
@@ -25,7 +24,6 @@ nav a:hover {
 
 .index-information{
     text-align: justify;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
 
@@ -75,7 +73,7 @@ input{
 }
 
 div.card{
-    font-family: 'PT Sans Narrow', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 16px;
 }
 

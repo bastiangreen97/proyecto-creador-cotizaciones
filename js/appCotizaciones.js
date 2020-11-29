@@ -148,11 +148,11 @@ const tableTemplate = () => {
             <tr>
                 <td>${element.name}</td>
                 <td>${element.type}</td>
-                <td>${element.price}</td>
+                <td>$${element.price}</td>
                 <td>${element.percent}%</td>
-                <td>${element.priceDiscount}</td>
+                <td>$${element.priceDiscount}</td>
                 <td>${element.quantity}</td>
-                <td>${element.subTotal}</td>
+                <td>$${element.subTotal}</td>
                 <td><button class="btn-small red" value="${element.name}">Quitar</button></td>
             </tr>
         `;
@@ -307,7 +307,7 @@ const createPDF = () => {
         showFoot: 'lastPage',
         head: [['Nombre', 'Tipo', 'Precio', '% Descuento', 'Precio con desc.', 'Cantidad', 'Subtotal']],
         body: valuesBody,
-        foot: [[' ', ' ', ' ', ' ', ' ', 'Total: ', `${auxTotal}`]]
+        foot: [[' ', ' ', ' ', ' ', ' ', 'Total: ', `$${auxTotal}`]]
     });
     doc.autoTable({
         theme: 'plain',

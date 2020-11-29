@@ -77,7 +77,7 @@ const tableTemplate = () => {
             <tr>
                 <td>${element.name}</td>
                 <td>${element.type}</td>
-                <td>${element.price}</td>
+                <td>$${element.price}</td>
                 <td><button class="btn-small red" value="${element.name}">Eliminar</button></td>
                 <td><button class="btn-small" value="${element.name}">Editar</button></td>
             </tr>
