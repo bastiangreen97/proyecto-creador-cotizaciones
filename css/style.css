@@ -1,22 +1,36 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@700&display=swap');
 
 body{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 nav{
+    font-family: 'Open Sans', sans-serif;
     background-color: black;
 }
 
+nav a:hover {  
+    opacity: 0.5;
+ }
+
+ .active-here{
+    background-color:#383838;
+ }
+
 .index-information{
     text-align: justify;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.index-information ul{
+    margin-left: 25px;
 }
 
 .index-information a{
@@ -25,18 +39,13 @@ nav{
     font-weight: bolder;
 }
 
-.index-information li{
-    margin-left: 30px;
-    font-size: 13px;
-}
-
 .container{
     width: 80% !important;
 }
 
 .back-purple-gradient{
-    background: rgb(0,212,255);
-background: linear-gradient(90deg, rgba(0,212,255,1) 7%, rgba(4,119,193,1) 40%, rgba(58,58,181,1) 63%, rgba(87,44,172,1) 71%, rgba(134,44,161,1) 95%);
+    background: rgb(81,179,255);
+    background: linear-gradient(90deg, rgba(81,179,255,1) 0%, rgba(55,96,198,1) 50%, rgba(142,76,168,1) 100%);
 }
 
 .tabs{
@@ -57,8 +66,7 @@ background: linear-gradient(90deg, rgba(0,212,255,1) 7%, rgba(4,119,193,1) 40%, 
 }
 
 h2,h3,h4,h5{
-    font-family: 'Amatic SC', cursive;
-    text-shadow: 4px 4px 4px rgba(150, 150, 150, 1);
+    font-family: 'PT Sans Narrow', sans-serif;
     text-align: center;
 }
 
@@ -86,11 +94,6 @@ thead{
 
 td{
     padding: 14px;
-}
-
-.icon-card{
-    width: 50px;
-    height: 50px;
 }
 
 .width-100{

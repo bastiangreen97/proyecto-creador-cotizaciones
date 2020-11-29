@@ -100,13 +100,13 @@ const indicatorTemplate = () => {
     countAll = items.length;
 
     indicatorServices.innerHTML = `
-        <img src="img/servicios.png" class="icon-card"><p>Servicios registrados: ${countServices}</p>
+        <img src="img/servicio.png"><p>Servicios registrados: ${countServices}</p>
     `;
     indicatorProducts.innerHTML = `
-        <img src="img/productos.png" class="icon-card"><p>Productos registrados: ${countProducts}</p>
+        <img src="img/producto.png"><p>Productos registrados: ${countProducts}</p>
     `;
     indicatorAll.innerHTML = `
-        <img src="img/total.png" class="icon-card"><p>Total de registros: ${countAll}<p>
+        <img src="img/registros.png"><p>Total de registros: ${countAll}<p>
     `;
 }
 
