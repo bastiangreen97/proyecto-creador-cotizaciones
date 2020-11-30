@@ -301,7 +301,7 @@ const createPDF = () => {
         footStyles: {fontSize: 12},
         columnStyles: {0: {fillColor: [212, 231, 236]}},
         showFoot: 'lastPage',
-        head: [['Nombre', 'Tipo', 'Precio', '% Descuento', 'Precio con desc.', 'Cantidad', 'Subtotal']],
+        head: [['Nombre', 'Tipo', 'Precio unitario', '% Descuento', 'Precio u. con desc.', 'Cantidad', 'Subtotal']],
         body: valuesBody,
         foot: [[' ', ' ', ' ', ' ', ' ', 'Total: ', `$${auxTotal}`]]
     });
