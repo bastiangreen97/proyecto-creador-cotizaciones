@@ -99,13 +99,13 @@ const indicatorTemplate = () => {
     countAll = items.length;
 
     indicatorServices.innerHTML = `
-        <img src="img/servicio.png"><p>Servicios registrados: ${countServices}</p>
+        <img src="img/servicio.svg" class="card-icon"><p>Servicios registrados: ${countServices}</p>
     `;
     indicatorProducts.innerHTML = `
-        <img src="img/producto.png"><p>Productos registrados: ${countProducts}</p>
+        <img src="img/producto.svg" class="card-icon"><p>Productos registrados: ${countProducts}</p>
     `;
     indicatorAll.innerHTML = `
-        <img src="img/registros.png"><p>Total de registros: ${countAll}<p>
+        <img src="img/registros.svg" class="card-icon"><p>Total de registros: ${countAll}<p>
     `;
 }
 
@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const instancesMdl = M.Modal.init(elemsMdl);
     const elemsSlc = document.querySelectorAll('select');
     const instancesSlc = M.FormSelect.init(elemsSlc);
-    
 });
 
 //Carga de contenido DOM, funciones

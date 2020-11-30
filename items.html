@@ -15,7 +15,7 @@
         <nav class="nav-extended">
             <div class="nav-wrapper container">
                 <a href="index.html"><i class="material-icons left">home</i>Inicio</a>
-                <a href="#" data-target="menu-right" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
+                <a href="#" data-target="menu-right-items" class="sidenav-trigger right"><i class="material-icons">storage</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li class="active-here"><a href="items.html"><i class="material-icons left">widgets</i>Gestión de servicios y productos</a></li>
                     <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
@@ -23,14 +23,14 @@
             </div>
         </nav>
     </div>
-    <ul class="sidenav" id="menu-right">
+    <ul class="sidenav" id="menu-right-items">
         <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
         <li><a href="cotizaciones.html"><i class="material-icons left">web</i>Creador de cotizaciones</a></li>
     </ul>
     <div class="width-100 back-purple-gradient">
         <div class="container">
-            <div class="row valign-wrapper">
-                <div class="col s12 m6 push-m5 animate__animated animate__fadeInRight">
+            <div class="row valign-wrapper animate__animated animate__fadeInDown">
+                <div class="col s12 m6 push-m5">
                     <h4 class="white-text">.- Gestión de servicios y productos -.</h4>
                     <div class="row">
                         <div class="col s12 m4">
@@ -58,12 +58,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s12 m5 pull-m7 animate__animated animate__fadeInLeft">
+                <div class="col s12 m5 pull-m7">
                     <img class="responsive-img" src="img/imagengestion.svg">
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="row animate__animated animate__fadeIn">
+            <div class="col s12">
+                <h3>.- Productos y servicios registrados -.</h3>
+                <table class="responsive-table z-depth-3 highlight striped centered">
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Eliminar</th>
+                        <th>Editar</th>
+                    </thead>
+                    <tbody id="tbl-content">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
                 <div id="modal-items" class="modal">
                     <div class="modal-content">
                         <h4 id="title-mdl" class="center"></h4>
@@ -91,22 +113,6 @@
                         <button type="submit" id="btn-cancel" class="btn waves-effect waves-light orange">Cancelar</button>
                     </div>
                 </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col s12 animate__animated animate__backInRight">
-                <h3>.- Productos y servicios registrados -.</h3>
-                <table class="responsive-table z-depth-3 highlight striped centered">
-                    <thead>
-                        <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Precio</th>
-                        <th>Eliminar</th>
-                        <th>Editar</th>
-                    </thead>
-                    <tbody id="tbl-content">
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
